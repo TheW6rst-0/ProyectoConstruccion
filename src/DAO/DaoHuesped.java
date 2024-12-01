@@ -69,17 +69,17 @@ public class DaoHuesped {
                 String emailHuesped = resultSet.getString("emailHuesped");
                 int idTarjeta = resultSet.getInt("idTarjeta");
 
-                System.out.println("Información del empleado:");
+                System.out.println("Información del Huesped:");
                 System.out.println("ID Huesped: " + idHuesped);
                 System.out.println("Nombre: " + nombreHuesped);
                 System.out.println("Email: " + emailHuesped);
                 System.out.println("ID Tarjeta: " + idTarjeta);
             } else {
-                System.out.println("No se encontró ningún empleado con la clave: " + idHuesped);
+                System.out.println("No se encontró ningún Huesped con la clave: " + idHuesped);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("Error al buscar el empleado: " + e.getMessage());
+            System.err.println("Error al buscar el Huesped: " + e.getMessage());
         }
     }
 }
