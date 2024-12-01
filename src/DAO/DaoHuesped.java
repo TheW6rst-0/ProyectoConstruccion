@@ -23,34 +23,34 @@ public class DaoHuesped {
 
     public void agregarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
-        String sql = "INSERT INTO empleado (idHuesped, nombreHuesped, emailHuesped, idTarjeta) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO huesped (idHuesped,nombreHuesped,emailHuesped,idTarjeta) VALUES(?,?,?,?)";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, huesped.getIdhuesped());
             statement.setString(2, huesped.getNombre());
             statement.setString(3, huesped.getEmail());
             statement.setInt(4, huesped.getIdtarjeta());
             statement.executeUpdate();
-            System.out.println("Empleado guardado exitosamente en la base de datos.");
+            System.out.println("Huesped guardado exitosamente en la base de datos.");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("Error al guardar el Empleado en la base de datos: " + e.getMessage());
+            System.err.println("Error al guardar el Huesped en la base de datos: " + e.getMessage());
         }
     }
 
-    public void eliminarEmpleado(Huesped huesped) throws SQLException {
+    public void eliminarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
-        String sql = "DELETE FROM empleado WHERE idHuesped=?";
+        String sql = "DELETE FROM huesped WHERE idHuesped=?";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, huesped.getIdhuesped());
             statement.executeUpdate();
-            System.out.println("Empleado eliminado exitosamente de la base de datos.");
+            System.out.println("Huesped eliminado exitosamente de la base de datos.");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("Error al eliminar el Empleado de la base de datos: " + e.getMessage());
+            System.err.println("Error al eliminar el Huesped de la base de datos: " + e.getMessage());
         }
     }
 
-    public void modificarEmpleado() throws SQLException {
+    public void modificarHuesped() throws SQLException {
         con = getCon();
 
     }

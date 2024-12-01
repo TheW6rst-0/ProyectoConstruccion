@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df77e246-d705-430d-b965-17d3e5978e39" name="Changes" comment="asdfasdf">
+    <list default="true" id="df77e246-d705-430d-b965-17d3e5978e39" name="Changes" comment="eeeeeeeeeeeee">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/DaoEmpleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/DaoEmpleado.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/DaoHuesped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/DaoHuesped.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Habitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Habitacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Huesped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Huesped.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Reservacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Reservacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Tarjeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tarjeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +33,12 @@
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="e5d6528d-c8e6-4363-9248-05f990e1024e" />
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Alexandercp7/construccion-de-software.git&quot;,
-    &quot;accountId&quot;: &quot;e5d6528d-c8e6-4363-9248-05f990e1024e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/TheW6rst-0/ProyectoConstruccion.git",
+    "accountId": "e5d6528d-c8e6-4363-9248-05f990e1024e"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -103,7 +99,7 @@
       <workItem from="1732126136500" duration="1474000" />
       <workItem from="1732228634722" duration="3400000" />
       <workItem from="1732739870540" duration="30000" />
-      <workItem from="1733086026927" duration="1152000" />
+      <workItem from="1733086026927" duration="2168000" />
     </task>
     <task id="LOCAL-00001" summary="asdfasdf">
       <option name="closed" value="true" />
@@ -113,7 +109,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732010363874</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="eeeeeeeeeeeee">
+      <option name="closed" value="true" />
+      <created>1733087279350</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733087279350</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,7 +136,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="asdfasdf" />
-    <option name="LAST_COMMIT_MESSAGE" value="asdfasdf" />
+    <MESSAGE value="eeeeeeeeeeeee" />
+    <option name="LAST_COMMIT_MESSAGE" value="eeeeeeeeeeeee" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -140,6 +145,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.sql.SQLException" package="java.sql" />
           <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.SQLSyntaxErrorException" package="java.sql" />
+          <option name="timeStamp" value="3" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
