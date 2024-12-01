@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df77e246-d705-430d-b965-17d3e5978e39" name="Changes" comment="ya jalan los huespedes d mrd">
+    <list default="true" id="df77e246-d705-430d-b965-17d3e5978e39" name="Changes" comment="DAO huesped y Tarjeta listos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/DaoHuesped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/DaoHuesped.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/DaoTarjeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/DaoTarjeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/DaoHabitaciones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/DaoHabitaciones.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Tarjeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tarjeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Habitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Habitacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Reservacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Reservacion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +74,21 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="UNNAMED_CLASS_CONFIGURATION" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ProyectoConstruccion" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -101,7 +116,7 @@
       <workItem from="1732126136500" duration="1474000" />
       <workItem from="1732228634722" duration="3400000" />
       <workItem from="1732739870540" duration="30000" />
-      <workItem from="1733086026927" duration="4275000" />
+      <workItem from="1733086026927" duration="7604000" />
     </task>
     <task id="LOCAL-00001" summary="asdfasdf">
       <option name="closed" value="true" />
@@ -127,7 +142,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733088425409</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="DAO huesped y Tarjeta listos">
+      <option name="closed" value="true" />
+      <created>1733090510168</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733090510168</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +171,8 @@
     <MESSAGE value="asdfasdf" />
     <MESSAGE value="eeeeeeeeeeeee" />
     <MESSAGE value="ya jalan los huespedes d mrd" />
-    <option name="LAST_COMMIT_MESSAGE" value="ya jalan los huespedes d mrd" />
+    <MESSAGE value="DAO huesped y Tarjeta listos" />
+    <option name="LAST_COMMIT_MESSAGE" value="DAO huesped y Tarjeta listos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
