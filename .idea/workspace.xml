@@ -4,31 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df77e246-d705-430d-b965-17d3e5978e39" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProyectoConstruccion.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAO/DaoEmpleado.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAO/DaoHabitaciones.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAO/DaoHuesped.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAO/DaoReservas.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DAO/DaoTarjeta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Administrador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Calendario.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Efectivo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Empleado.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Habitacion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Hotel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Huesped.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Operativo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Pago.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Reservacion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Tarjeta.java" afterDir="false" />
+    <list default="true" id="df77e246-d705-430d-b965-17d3e5978e39" name="Changes" comment="asdfasdf">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/DaoEmpleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/DaoEmpleado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/DaoHuesped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/DaoHuesped.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Habitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Habitacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Huesped.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Huesped.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Reservacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Reservacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Tarjeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tarjeta.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,9 +28,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;TheW6rst-0&quot;
+  }
+}</component>
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="e5d6528d-c8e6-4363-9248-05f990e1024e" />
   </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Alexandercp7/construccion-de-software.git&quot;,
+    &quot;accountId&quot;: &quot;e5d6528d-c8e6-4363-9248-05f990e1024e&quot;
+  }
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -62,23 +57,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alexp/Downloads/Si&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -101,12 +98,41 @@
       <workItem from="1731709169988" duration="338000" />
       <workItem from="1731709623686" duration="109000" />
       <workItem from="1731992759988" duration="349000" />
-      <workItem from="1731993125340" duration="14222000" />
+      <workItem from="1731993125340" duration="14828000" />
+      <workItem from="1732010857779" duration="6106000" />
+      <workItem from="1732126136500" duration="1474000" />
+      <workItem from="1732228634722" duration="3400000" />
+      <workItem from="1732739870540" duration="30000" />
+      <workItem from="1733086026927" duration="1152000" />
     </task>
+    <task id="LOCAL-00001" summary="asdfasdf">
+      <option name="closed" value="true" />
+      <created>1732010363874</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732010363874</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="asdfasdf" />
+    <option name="LAST_COMMIT_MESSAGE" value="asdfasdf" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

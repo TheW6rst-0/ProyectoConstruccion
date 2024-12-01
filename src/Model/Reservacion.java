@@ -1,11 +1,13 @@
 package Model;
 
 public class Reservacion {
-    private String idReservacion;
-    private Huesped huesped;
+    private int idReservacion;
+    private int idHuesped;
+    private int idHabitacion;
+    private int idpago;
     private String fechaLlegada;
     private String fechaSalida;
-    private Pago pago;
-    private Habitacion habitacion;
+
+
 
 }

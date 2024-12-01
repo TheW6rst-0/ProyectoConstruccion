@@ -10,8 +10,7 @@ public class DaoEmpleado {
     private String user = "root";
     private String pass = "";
 
-    public DaoEmpleado() {
-    }
+
 
     public Connection getCon() {
         try {
