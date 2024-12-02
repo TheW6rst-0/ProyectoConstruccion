@@ -1,5 +1,10 @@
 package com.construccion.proyecto.control;
 
+import java.util.List;
+
+import com.construccion.proyecto.dao.DaoHuesped;
+import com.construccion.proyecto.model.Huesped;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +14,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class AdminHuespedesController implements SceneAware{
+    private DaoHuesped daoHuesped = new DaoHuesped();
+    private Huesped huesped;
 
     @FXML
     private Button btnCerrar;
@@ -141,8 +148,21 @@ public class AdminHuespedesController implements SceneAware{
 
     public TextField getTxtReservacion() {
         return txtReservacion;
+    }    
+
+    private List<Huesped> cargarHuespedes() {
+        List<Huesped> huespedes = null;
+        try {
+            huespedes = daoHuesped.obtenerHuespedes();
+        } catch (Exception e) {
+            e.printStackTrace();
+            sceneManager.mostrarAlerta("Error", "No se pudieron cargar los huespedes.", null);
+        }
+        return huespedes;
     }
 
-    
-
+    public static void main(String[] args) {
+        AdminHuespedesController adminHuespedesController = new AdminHuespedesController();
+        adminHuespedesController.cargarHuespedes(); 
+    }
 }

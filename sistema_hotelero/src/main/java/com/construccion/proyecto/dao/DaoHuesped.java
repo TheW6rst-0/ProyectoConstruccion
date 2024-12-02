@@ -1,7 +1,8 @@
 package com.construccion.proyecto.dao;
 import java.sql.*;
-
-import com.construccion.proyecto.model.Huesped;;
+import java.util.ArrayList; 
+import com.construccion.proyecto.model.Huesped;
+import java.util.List;
 public class DaoHuesped {
     private Connection con = null;
     private String host = "jdbc:mysql://localhost:3306/hotel";
@@ -55,32 +56,77 @@ public class DaoHuesped {
 
     }
 
-    public void buscarHuesped(int idHuesped) throws SQLException {
+    // public void buscarHuesped(int idHuesped) throws SQLException {
+    //     con = getCon();
+    //     String sqlConsulta = "SELECT * FROM huesped WHERE idHuesped = ?";
+    //     try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
+    //         statement.setInt(1, idHuesped);
+    //         ResultSet resultSet = statement.executeQuery();
+
+
+    //         if (resultSet.next()) {
+    //             int id = resultSet.getInt("idHuesped");
+    //             String nombreHuesped = resultSet.getString("nombreHuesped");
+    //             String emailHuesped = resultSet.getString("emailHuesped");
+    //             int idTarjeta = resultSet.getInt("idTarjeta");
+
+    //             System.out.println("Información del Huesped:");
+    //             System.out.println("ID Huesped: " + idHuesped);
+    //             System.out.println("Nombre: " + nombreHuesped);
+    //             System.out.println("Email: " + emailHuesped);
+    //             System.out.println("ID Tarjeta: " + idTarjeta);
+    //         } else {
+    //             System.out.println("No se encontró ningún Huesped con la clave: " + idHuesped);
+    //         }
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //         System.err.println("Error al buscar el Huesped: " + e.getMessage());
+    //     }
+    // }
+
+    public List<Huesped> obtenerHuespedes() throws SQLException {
         con = getCon();
-        String sqlConsulta = "SELECT * FROM huesped WHERE idHuesped = ?";
+        List<Huesped> huespedes = new ArrayList<>();
+        String sqlConsulta = "SELECT * FROM huesped";
         try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
-            statement.setInt(1, idHuesped);
             ResultSet resultSet = statement.executeQuery();
-
-
-            if (resultSet.next()) {
-                int id = resultSet.getInt("idHuesped");
+            while (resultSet.next()) {
+                int idHuesped = resultSet.getInt("idHuesped");
                 String nombreHuesped = resultSet.getString("nombreHuesped");
                 String emailHuesped = resultSet.getString("emailHuesped");
                 int idTarjeta = resultSet.getInt("idTarjeta");
 
-                System.out.println("Información del Huesped:");
-                System.out.println("ID Huesped: " + idHuesped);
-                System.out.println("Nombre: " + nombreHuesped);
-                System.out.println("Email: " + emailHuesped);
-                System.out.println("ID Tarjeta: " + idTarjeta);
+                Huesped huesped = new Huesped(idHuesped, nombreHuesped, emailHuesped, idTarjeta);
+                huespedes.add(huesped);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al obtener los Huespedes: " + e.getMessage());
+        }
+        return huespedes;
+    }   
+
+    public Huesped buscarHuesped(String nombreHuesped) throws SQLException {
+        con = getCon();
+        Huesped huesped = null;
+        String sqlConsulta = "SELECT * FROM huesped WHERE nombreHuesped = ?";
+        try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
+            statement.setString(1, nombreHuesped);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int idHuesped = resultSet.getInt("idHuesped");
+                String nombre = resultSet.getString("nombreHuesped");
+                String emailHuesped = resultSet.getString("emailHuesped");
+                int idTarjeta = resultSet.getInt("idTarjeta");
+                huesped = new Huesped(idHuesped, nombre, emailHuesped, idTarjeta);
             } else {
-                System.out.println("No se encontró ningún Huesped con la clave: " + idHuesped);
+                System.out.println("No se encontró ningún Huesped con el nombre: " + nombreHuesped);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             System.err.println("Error al buscar el Huesped: " + e.getMessage());
         }
+        return huesped;
     }
 }
 

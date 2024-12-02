@@ -1,6 +1,5 @@
 package com.construccion.proyecto.dao;
 
-import com.construccion.proyecto.model.Huesped;
 import com.construccion.proyecto.model.Reservacion;
 
 import java.sql.*;

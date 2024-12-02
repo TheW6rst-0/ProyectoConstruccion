@@ -2,7 +2,7 @@ package com.construccion.proyecto.dao;
 import com.construccion.proyecto.model.Empleado;
 
 import java.sql.*;
-import java.util.ArrayList;
+
 
 public class DaoEmpleado {
     private Connection con = null;
