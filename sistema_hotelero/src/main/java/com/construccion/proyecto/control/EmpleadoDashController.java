@@ -43,7 +43,7 @@ public class EmpleadoDashController implements SceneAware {
     void btnHuespedesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/empleado/EmpleadoHuespedes.fxml");
     }
-
+    
     @FXML
     void btnReservarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/empleado/EmpleadoReservar.fxml");

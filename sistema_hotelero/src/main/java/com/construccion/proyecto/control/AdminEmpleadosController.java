@@ -81,5 +81,4 @@ public class AdminEmpleadosController implements SceneAware{
     void btnVentasClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminVentas.fxml");
     }
-
 }

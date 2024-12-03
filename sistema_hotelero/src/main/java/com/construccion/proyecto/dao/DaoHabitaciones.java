@@ -1,5 +1,9 @@
 package com.construccion.proyecto.dao;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.construccion.proyecto.model.Habitacion;
 
@@ -56,10 +60,28 @@ public class DaoHabitaciones {
         }
     }
 
-    public void modificarHuesped() throws SQLException {
+    public void modificarHabitacion(Habitacion habitacion) throws SQLException {
         con = getCon();
-
+        String sql = "UPDATE habitacion SET tipoHabitacion = ?, camas = ?, precio = ?, disponibilidad = ? WHERE idHabitacion = ?";
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, habitacion.getTipoHabitacion());
+            statement.setString(2, habitacion.getCamas());
+            statement.setDouble(3, habitacion.getPrecio());
+            statement.setBoolean(4, habitacion.isDisponibilidad());
+            statement.setInt(5, habitacion.getIdHabitacion());
+    
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Habitación actualizada exitosamente.");
+            } else {
+                System.out.println("No se encontró ninguna habitación con el ID especificado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al modificar la habitación: " + e.getMessage());
+        }
     }
+    
 
     public void buscarHabitacion(int idHabitacion) throws SQLException {
         con = getCon();

@@ -1,7 +1,12 @@
 package com.construccion.proyecto.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.construccion.proyecto.model.Tarjeta;
-import java.sql.*;
 
 public class DaoTarjeta {
     private Connection con = null;
@@ -58,7 +63,7 @@ public class DaoTarjeta {
         }
     }
 
-    public void modificarHuesped() throws SQLException {
+    public void modificarTarjeta() throws SQLException {
         con = getCon();
 
     }
