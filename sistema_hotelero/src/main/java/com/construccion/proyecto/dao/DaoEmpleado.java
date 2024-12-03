@@ -1,7 +1,8 @@
 package com.construccion.proyecto.dao;
 import com.construccion.proyecto.model.Empleado;
-
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DaoEmpleado {
@@ -85,6 +86,26 @@ public class DaoEmpleado {
             System.err.println("Error al buscar el empleado: " + e.getMessage());
         }
     }
+    public List<Empleado> obtenerEmpleados() throws SQLException {
+        con = getCon();
+        List<Empleado> empleados = new ArrayList<>();
+        String sqlConsulta = "SELECT * FROM empleado";
+        try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int claveEmp = resultSet.getInt("claveEmp");
+                String nombre = resultSet.getString("nombreEmp");
+                String usuario = resultSet.getString("usuario");
+                String contrasenia = resultSet.getString("contrasenia");
+                int rol = resultSet.getInt("rol");
+                empleados.add(new Empleado(claveEmp, nombre, usuario, contrasenia, rol));   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al obtener los Huespedes: " + e.getMessage());
+        }
+        return empleados;
+    }   
 
     public Empleado validarCredenciales(String usuario, String contrasenia) {
         con = getCon();

@@ -229,7 +229,7 @@ public class AdminHuespedesController implements SceneAware, Initializable {
         colReserva.setCellValueFactory(new PropertyValueFactory<InfoReservacion, Integer>("idReservacion"));
     }
     
-    @SuppressWarnings("unused")
+    
     public class InfoReservacion{
         private int idHuesped;
         private int idHabitacion;
