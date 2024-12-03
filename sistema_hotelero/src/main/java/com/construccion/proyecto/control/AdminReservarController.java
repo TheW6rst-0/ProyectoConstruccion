@@ -1,4 +1,14 @@
 package com.construccion.proyecto.control;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import static java.util.concurrent.TimeUnit.DAYS;
+
+import com.construccion.proyecto.dao.DaoHabitaciones;
+import com.construccion.proyecto.dao.DaoHuesped;
+import com.construccion.proyecto.dao.DaoReservas;
+import com.construccion.proyecto.model.Habitacion;
+import com.construccion.proyecto.model.Huesped;
+import com.construccion.proyecto.model.Reservacion;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,10 +18,16 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 
 public class AdminReservarController implements SceneAware{
-
+    private DaoReservas daoReservas = new DaoReservas();
+    private Reservacion reserva = new Reservacion(0, 0, 0, null, null);
+    private DaoHuesped daoHuesped = new DaoHuesped();
+    private Huesped huesped = new Huesped(0, null, null, 0);
+    private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
+    private Habitacion habitacion = new Habitacion(0, null, null, 0, false);
     @FXML
     private Button btnCerrar;
 
@@ -91,7 +107,6 @@ public class AdminReservarController implements SceneAware{
         this.sceneManager = sceneManager;
     }
 
-
     @FXML
     void btnCerrarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/Login.fxml");
@@ -119,7 +134,20 @@ public class AdminReservarController implements SceneAware{
 
     @FXML
     void btnProcederClicked(ActionEvent event) {
+       
+        LocalDate date1 = fechaLlegada.getValue();
+        reserva.setFechaLlegada(date1);
+        LocalDate date2 = fechaSalida.getValue();
+        reserva.setFechaSalida(date2);
 
+        huesped.setNombre(txtNombre.getText());
+        huesped.setEmail(txtCorreo.getText());
+        long noches = ChronoUnit.DAYS.between(date1,date2);  
+        txtNoches.setText(String.valueOf(noches));
+        double precio = noches * habitacion.getPrecio();
+        txtPrecio.setText(String.valueOf(precio));
+        daoHuesped.agregarHuesped(huesped);
+        daoReservas.agregarReservacion(reserva);
     }
     @FXML
     void btnHabitacionesClicked(ActionEvent event) {
