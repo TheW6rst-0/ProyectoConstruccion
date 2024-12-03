@@ -1,7 +1,7 @@
 package com.construccion.proyecto.control;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import static java.util.concurrent.TimeUnit.DAYS;
 
 import com.construccion.proyecto.dao.DaoHabitaciones;
 import com.construccion.proyecto.dao.DaoHuesped;
@@ -9,9 +9,9 @@ import com.construccion.proyecto.dao.DaoReservas;
 import com.construccion.proyecto.dao.DaoTarjeta;
 import com.construccion.proyecto.model.Habitacion;
 import com.construccion.proyecto.model.Huesped;
+import com.construccion.proyecto.model.Pago;
 import com.construccion.proyecto.model.Reservacion;
 import com.construccion.proyecto.model.Tarjeta;
-import com.construccion.proyecto.model.Pago;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +21,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
 
 public class AdminReservarController implements SceneAware{
@@ -62,7 +61,7 @@ public class AdminReservarController implements SceneAware{
     private Button btnVentas;
 
     @FXML
-    private ChoiceBox<?> choiceTipo;
+    private ChoiceBox<String> choiceTipo;
 
     @FXML
     private DatePicker fechaLlegada;
@@ -82,14 +81,9 @@ public class AdminReservarController implements SceneAware{
     @FXML
     private TextField txtCorreo;
 
-    @FXML
-    private TextField txtDireccion;
 
     @FXML
     private TextField txtDisponibilidad;
-
-    @FXML
-    private TextField txtDocumento;
 
     @FXML
     private TextField txtNoches;
@@ -97,8 +91,6 @@ public class AdminReservarController implements SceneAware{
     @FXML
     private TextField txtNombre;
 
-    @FXML
-    private TextField txtPersonas;
 
     @FXML
     private TextField txtPrecio;
@@ -112,7 +104,7 @@ public class AdminReservarController implements SceneAware{
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
-
+   
     @FXML
     void btnCerrarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/Login.fxml");
@@ -141,42 +133,91 @@ public class AdminReservarController implements SceneAware{
     void btnHabitacionesClicked(ActionEvent event){
         sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
     }
-    @FXML
-    void btnProcederClicked(ActionEvent event) {
-       
+     public void initialize() {
+    // Configurar opciones del ChoiceBox
+    choiceTipo.getItems().addAll("SNG", "DBL", "ST");
+
+    // Listener para cuando se seleccione un tipo de habitación
+    choiceTipo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        if (newValue != null) {
+            try {
+                Habitacion habitacion = daoHabitaciones.buscarHabitacionPorTipo(newValue);
+                reserva.setIdHabitacion(habitacion.getIdHabitacion());
+                if (habitacion != null) {
+                    actualizarInfoHabitacion(habitacion);
+                } else {
+                    mostrarMensaje("No se encontró una habitación disponible para el tipo seleccionado.");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                mostrarMensaje("Error al buscar habitaciones en la base de datos.");
+            }
+        }
+    });
+}
+
+// Método auxiliar para actualizar la interfaz con la información de la habitación
+private void actualizarInfoHabitacion(Habitacion habitacion) {
+    txtCamas.setText(habitacion.getCamas());
+    txtPrecio.setText(String.valueOf(habitacion.getPrecio()));
+    txtDisponibilidad.setText(habitacion.isDisponibilidad()? "Disponible" : "No disponible");
+}
+
+private void mostrarMensaje(String mensaje) {
+    System.out.println(mensaje);
+}
+@FXML
+void btnProcederClicked(ActionEvent event) {
+    try {
         LocalDate date1 = fechaLlegada.getValue();
         LocalDate date2 = fechaSalida.getValue();
+        if (date1 == null || date2 == null || date1.isAfter(date2)) {
+            System.out.println("Fechas inválidas. Por favor, verifica.");
+            return;
+        }
+
+        if (txtNombre.getText().isEmpty() || txtCorreo.getText().isEmpty()) {
+            System.out.println("Por favor, complete los campos obligatorios.");
+            return;
+        }
+
+        // Configurar datos del huésped
+        huesped.setNombre(txtNombre.getText());
+        huesped.setEmail(txtCorreo.getText());
+        huesped.setIdtarjeta(235);
+        daoHuesped.agregarHuesped(huesped);
+       huesped = daoHuesped.buscarHuesped(txtNombre.getText());
+        int idHuesped = huesped.getIdhuesped();
+        
+
+        // Configurar datos de la reservación
+        reserva.setIdHuesped(idHuesped);
         reserva.setFechaLlegada(date1);
         reserva.setFechaSalida(date2);
 
-        huesped.setNombre(txtNombre.getText());
-        huesped.setEmail(txtCorreo.getText());
-
-        long noches = ChronoUnit.DAYS.between(date1,date2);  
-        double total = noches * habitacion.getPrecio();
+        long noches = ChronoUnit.DAYS.between(date1, date2);
+        double precio = Double.parseDouble(txtPrecio.getText());
+        double total = noches * precio;
         txtNoches.setText(String.valueOf(noches));
         txtTotal.setText(String.valueOf(total));
-        huesped.setIdtarjeta(tarjeta.getIdTarjeta());
-        if(btnTarjeta.isSelected()){
-         pago.pagoTarjeta(tarjeta, total);
-        }else{if(btnEfectivo.isSelected()){
-            pago.pagoEfectivo(total, }); //Falta la variable o el campo para el efectivo entregado
 
+        if (btnTarjeta.isSelected()) {
+            pago.pagoTarjeta(tarjeta, total);
+        } else if (btnEfectivo.isSelected()) {
+            pago.pagoEfectivo(total, total);
         }
 
-        
-
-        }
-
-        
-        
-
-
-
-        
-        daoHuesped.agregarHuesped(huesped);
+        // Guardar la reservación
         daoReservas.agregarReservacion(reserva);
+
+
+    } catch (Exception e) {
+        System.out.println("Error al procesar la reserva: " + e.getMessage());
+    }
+}
+
+
     }
 
-}
+
 

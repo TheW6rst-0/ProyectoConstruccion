@@ -43,6 +43,9 @@ public class DaoHuesped {
         }
     }
 
+    
+    
+
     public void eliminarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
         String sql = "DELETE FROM huesped WHERE idHuesped=?";

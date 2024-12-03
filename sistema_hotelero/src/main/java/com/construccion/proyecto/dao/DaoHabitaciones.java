@@ -114,6 +114,7 @@ public class DaoHabitaciones {
     }
 
     public Habitacion buscarHabitacionPorTipo(String tipo) throws SQLException {
+        con = getCon();
         String sql = "SELECT * FROM habitacion WHERE tipoHabitacion = ? LIMIT 1";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setString(1, tipo);
