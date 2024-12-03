@@ -1,8 +1,11 @@
 package com.construccion.proyecto.dao;
 
+
 import com.construccion.proyecto.model.Reservacion;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DaoReservas {
     private Connection con = null;
@@ -16,7 +19,7 @@ public class DaoReservas {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(host, user, pass);
-            System.out.println("Conexion exitosa");
+            
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -61,15 +64,36 @@ public class DaoReservas {
         con = getCon();
 
     }
+        
+    public List<Reservacion> obtenerReservaciones() throws SQLException {
+        con = getCon();
+        List<Reservacion> reservaciones = new ArrayList<>();
+        String sqlConsulta = "SELECT * FROM reservaciones";
+        try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int idReservacion = resultSet.getInt("idReservacion");
+                int idHuesped = resultSet.getInt("idHuesped");
+                int idHabitacion = resultSet.getInt("idHabitacion");
+                Date fechaLlegada = resultSet.getDate("fechaLlegada");
+                Date fechaSalida = resultSet.getDate("fechaSalida");
+                reservaciones.add(new Reservacion(idReservacion, idHuesped, idHabitacion, fechaLlegada.toLocalDate(), fechaSalida.toLocalDate())); 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al obtener los Huespedes: " + e.getMessage());
+        }
+        return reservaciones;
+    }   
+
+    
 
     public void buscarReservacion(int idReservacion) throws SQLException {
         con = getCon();
-        String sqlConsulta = "SELECT * FROM reservaciones WHERE idResercion = ?";
+        String sqlConsulta = "SELECT * FROM reservaciones WHERE idReservacion = ?";
         try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
             statement.setInt(1, idReservacion);
             ResultSet resultSet = statement.executeQuery();
-
-
             if (resultSet.next()) {
                 int id = resultSet.getInt("idReservacion");
 
@@ -86,4 +110,5 @@ public class DaoReservas {
             System.err.println("Error al buscar el Huesped: " + e.getMessage());
         }
     }
+
 }
