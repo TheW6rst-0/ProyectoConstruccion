@@ -1,6 +1,7 @@
 package com.construccion.proyecto.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,36 +69,32 @@ public class DaoTarjeta {
 
     }
 
-    public void buscarTarjeta(int idTarjeta) throws SQLException {
+    public Tarjeta buscarTarjeta(int idTarjeta) {
         con = getCon();
         String sqlConsulta = "SELECT * FROM tarjeta WHERE idTarjeta = ?";
         try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
             statement.setInt(1, idTarjeta);
             ResultSet resultSet = statement.executeQuery();
-
-
+    
             if (resultSet.next()) {
-                int id= resultSet.getInt("idTarjeta");
-                String nombreTitular= resultSet.getString("nombreTitular");
-                String numeroTarjeta= resultSet.getString("numeroTarjeta");
-                String nip= resultSet.getString("nip");
-                String vencimiento= resultSet.getString("vencimiento");
-                double saldo= resultSet.getDouble("saldo");
-
-                System.out.println("Información de la Tarjeta:");
-                System.out.println("ID Tarjeta: " + id);
-                System.out.println("Nombre: " + nombreTitular);
-                System.out.println("Numero: " + numeroTarjeta);
-                System.out.println("Fecha de vencimiento: " + vencimiento);
-                System.out.println("Saldo: " + saldo);
-
+                int id = resultSet.getInt("idTarjeta");
+                String nombreTitular = resultSet.getString("nombreTitular");
+                String numeroTarjeta = resultSet.getString("numeroTarjeta");
+                String nip = resultSet.getString("nip");
+                Date vencimiento = resultSet.getDate("vencimiento"); // Convertir a tipo Date
+                double saldo = resultSet.getDouble("saldo");
+    
+                // Crear y devolver la tarjeta encontrada
+                return new Tarjeta(id, nombreTitular, numeroTarjeta, nip, vencimiento, saldo);
             } else {
-                System.out.println("No se encontró ningún empleado con la clave: " + idTarjeta);
+                System.out.println("No se encontró ninguna tarjeta con el ID: " + idTarjeta);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("Error al buscar el empleado: " + e.getMessage());
+            System.err.println("Error al buscar la tarjeta: " + e.getMessage());
         }
+        return null; // Retornar null si no se encontró la tarjeta
     }
+    
 }
 

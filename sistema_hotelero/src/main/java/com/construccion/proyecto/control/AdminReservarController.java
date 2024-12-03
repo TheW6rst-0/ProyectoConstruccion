@@ -6,9 +6,12 @@ import static java.util.concurrent.TimeUnit.DAYS;
 import com.construccion.proyecto.dao.DaoHabitaciones;
 import com.construccion.proyecto.dao.DaoHuesped;
 import com.construccion.proyecto.dao.DaoReservas;
+import com.construccion.proyecto.dao.DaoTarjeta;
 import com.construccion.proyecto.model.Habitacion;
 import com.construccion.proyecto.model.Huesped;
 import com.construccion.proyecto.model.Reservacion;
+import com.construccion.proyecto.model.Tarjeta;
+import com.construccion.proyecto.model.Pago;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +31,9 @@ public class AdminReservarController implements SceneAware{
     private Huesped huesped = new Huesped(0, null, null, 0);
     private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
     private Habitacion habitacion = new Habitacion(0, null, null, 0, false);
+    private DaoTarjeta daoTarjeta = new DaoTarjeta();
+    private Tarjeta tarjeta = daoTarjeta.buscarTarjeta(235);
+    private Pago pago = new Pago();
     @FXML
     private Button btnCerrar;
 
@@ -131,27 +137,45 @@ public class AdminReservarController implements SceneAware{
     void btnVentasClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminVentas.fxml");
     }
-
+    @FXML
+    void btnHabitacionesClicked(ActionEvent event){
+        sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
+    }
     @FXML
     void btnProcederClicked(ActionEvent event) {
        
         LocalDate date1 = fechaLlegada.getValue();
-        reserva.setFechaLlegada(date1);
         LocalDate date2 = fechaSalida.getValue();
+        reserva.setFechaLlegada(date1);
         reserva.setFechaSalida(date2);
 
         huesped.setNombre(txtNombre.getText());
         huesped.setEmail(txtCorreo.getText());
+
         long noches = ChronoUnit.DAYS.between(date1,date2);  
+        double total = noches * habitacion.getPrecio();
         txtNoches.setText(String.valueOf(noches));
-        double precio = noches * habitacion.getPrecio();
-        txtPrecio.setText(String.valueOf(precio));
+        txtTotal.setText(String.valueOf(total));
+        huesped.setIdtarjeta(tarjeta.getIdTarjeta());
+        if(btnTarjeta.isSelected()){
+         pago.pagoTarjeta(tarjeta, total);
+        }else{if(btnEfectivo.isSelected()){
+            pago.pagoEfectivo(total, }); //Falta la variable o el campo para el efectivo entregado
+
+        }
+
+        
+
+        }
+
+        
+        
+
+
+
+        
         daoHuesped.agregarHuesped(huesped);
         daoReservas.agregarReservacion(reserva);
-    }
-    @FXML
-    void btnHabitacionesClicked(ActionEvent event) {
-
     }
 
 }
