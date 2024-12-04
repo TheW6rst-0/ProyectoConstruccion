@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
 public class AdminEmpleadosController implements SceneAware, Initializable{
-    DaoEmpleado daoEmpleado = new DaoEmpleado();
+    
     @FXML
     private Button btnBorrar;
 
@@ -128,7 +128,7 @@ public class AdminEmpleadosController implements SceneAware, Initializable{
     public void initialize(URL location, ResourceBundle resources) {
        cargarDatosEnTabla(obtenerEmpleados());
     }
-
+    DaoEmpleado daoEmpleado = new DaoEmpleado();
     @FXML
     void btnAgregarClicked(ActionEvent event) {
         String contrasena = txtContrasena.getText();

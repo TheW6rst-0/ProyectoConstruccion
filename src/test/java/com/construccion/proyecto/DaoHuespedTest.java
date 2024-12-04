@@ -2,6 +2,7 @@ package com.construccion.proyecto;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
+
 import com.construccion.proyecto.dao.DaoHuesped;
 import com.construccion.proyecto.model.Huesped;
 

@@ -32,7 +32,7 @@ public class DaoReservas {
         return con;
     }
 
-    public void agregarReservacion(Reservacion reservacion) throws SQLException {
+    public boolean agregarReservacion(Reservacion reservacion) throws SQLException {
         con = getCon();
         String sql = "INSERT INTO reservaciones (idReservacion, idHuesped, idHabitacion, fechaLlegada, fechaSalida) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
@@ -45,28 +45,27 @@ public class DaoReservas {
             statement.setDate(5, java.sql.Date.valueOf(reservacion.getFechaSalida()));
 
             statement.executeUpdate();
-            System.out.println("Reservación guardada exitosamente en la base de datos.");
+            return true;
         } catch (SQLException e) {
            
-            System.err.println("Error al guardar la reservación en la base de datos: " + e.getMessage());
+            return false;
         }
     }
 
 
-    public void eliminarHuesped(Reservacion reservacion) throws SQLException {
+    public boolean eliminarHuesped(Reservacion reservacion) throws SQLException {
         con = getCon();
         String sql = "DELETE FROM reservaciones WHERE idReservacion=?";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, reservacion.getIdReservacion());
             statement.executeUpdate();
-            System.out.println("Reservacion eliminado exitosamente de la base de datos.");
+            return true;
         } catch (SQLException e) {
-            
-            System.err.println("Error al eliminar el Reservacion de la base de datos: " + e.getMessage());
+                return false;
         }
     }
 
-    public void modificarReservas(Reservacion reservacion) throws SQLException {
+    public boolean modificarReservas(Reservacion reservacion) throws SQLException {
         con = getCon();
         String sql = "UPDATE reservaciones SET idHuesped = ?, idHabitacion = ?, fechaLlegada = ?, fechaSalida = ? WHERE idReservacion = ?";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
@@ -82,12 +81,13 @@ public class DaoReservas {
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Reservación actualizada exitosamente.");
+                return true;
             } else {
                 System.out.println("No se encontró ninguna reservación con el ID especificado.");
+                return false;
             }
         } catch (SQLException e) {
-            
-            System.err.println("Error al modificar la reservación: " + e.getMessage());
+            return false;
         }
     }
         
@@ -114,26 +114,29 @@ public class DaoReservas {
 
     
 
-    public void buscarReservacion(int idReservacion) throws SQLException {
+    public Reservacion buscarReservacion(int idReservacion) throws SQLException {
         con = getCon();
+        Reservacion reservacion = null;
         String sqlConsulta = "SELECT * FROM reservaciones WHERE idReservacion = ?";
         try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
             statement.setInt(1, idReservacion);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 int id = resultSet.getInt("idReservacion");
-
-
-
-                System.out.println("Información del Reservacion:");
-                System.out.println("ID Huesped: " + id);
+                int idHuesped = resultSet.getInt("idHuesped");
+                int idHabitacion = resultSet.getInt("idHabitacion");
+                Date fechaLlegada = resultSet.getDate("fechaLlegada");
+                Date fechaSalida = resultSet.getDate("fechaSalida");
+                return new Reservacion(id, idHuesped, idHabitacion, fechaLlegada.toLocalDate(), fechaSalida.toLocalDate());
 
             } else {
                 System.out.println("No se encontró ningún Huesped con la clave: " + idReservacion);
+                return null;
             }
         } catch (SQLException e) {
             
             System.err.println("Error al buscar el Huesped: " + e.getMessage());
+            return null;
         }
     }
 
