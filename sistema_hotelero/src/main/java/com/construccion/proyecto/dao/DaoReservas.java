@@ -61,12 +61,11 @@ public class DaoReservas {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            
-           return false;
+                return false;
         }
     }
 
-    public void modificarReservas(Reservacion reservacion) throws SQLException {
+    public boolean modificarReservas(Reservacion reservacion) throws SQLException {
         con = getCon();
         String sql = "UPDATE reservaciones SET idHuesped = ?, idHabitacion = ?, fechaLlegada = ?, fechaSalida = ? WHERE idReservacion = ?";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
@@ -82,12 +81,13 @@ public class DaoReservas {
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Reservación actualizada exitosamente.");
+                return true;
             } else {
                 System.out.println("No se encontró ninguna reservación con el ID especificado.");
+                return false;
             }
         } catch (SQLException e) {
-            
-            System.err.println("Error al modificar la reservación: " + e.getMessage());
+            return false;
         }
     }
         
@@ -116,25 +116,29 @@ public class DaoReservas {
 
     public Reservacion buscarReservacion(int idReservacion) throws SQLException {
         con = getCon();
+        Reservacion reservacion = null;
         String sqlConsulta = "SELECT * FROM reservaciones WHERE idReservacion = ?";
         try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
             statement.setInt(1, idReservacion);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
+                int id = resultSet.getInt("idReservacion");
                 int idHuesped = resultSet.getInt("idHuesped");
                 int idHabitacion = resultSet.getInt("idHabitacion");
-                LocalDate fechaLlegada = resultSet.getDate("fechaLlegada").toLocalDate();
-                LocalDate fechaSalida = resultSet.getDate("fechaSalida").toLocalDate();
-                return new Reservacion(idReservacion, idHuesped, idHabitacion, fechaLlegada, fechaSalida);
+                Date fechaLlegada = resultSet.getDate("fechaLlegada");
+                Date fechaSalida = resultSet.getDate("fechaSalida");
+                return new Reservacion(id, idHuesped, idHabitacion, fechaLlegada.toLocalDate(), fechaSalida.toLocalDate());
+
             } else {
-                return null; // Retorna null si no encuentra la reservación
+                System.out.println("No se encontró ningún Huesped con la clave: " + idReservacion);
+                return null;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new SQLException("Error al buscar la reservación: " + e.getMessage());
+            
+            System.err.println("Error al buscar el Huesped: " + e.getMessage());
+            return null;
         }
     }
-    
 
     public Map<Integer, List<LocalDate>> obtenerFechasOcupadasPorHabitacion() throws SQLException {
     String sql = "SELECT idHabitacion, fechaLlegada, fechaSalida FROM reservaciones";
