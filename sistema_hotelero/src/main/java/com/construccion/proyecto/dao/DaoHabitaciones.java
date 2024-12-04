@@ -4,14 +4,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.construccion.proyecto.model.Habitacion;
 
 public class DaoHabitaciones {
     private Connection con = null;
-    private String host = "jdbc:mysql://localhost:3306/hotel";
-    private String user = "root";
-    private String pass = "";
+    private final String host = "jdbc:mysql://localhost:3306/hotel";
+    private final String user = "root";
+    private final String pass = "";
 
 
 
@@ -21,7 +24,7 @@ public class DaoHabitaciones {
             con = DriverManager.getConnection(host, user, pass);
             
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            
         }
         return con;
     }
@@ -41,7 +44,7 @@ public class DaoHabitaciones {
 
             System.out.println("Habitación guardada exitosamente en la base de datos.");
         } catch (SQLException e) {
-            e.printStackTrace();
+          
             System.err.println("Error al guardar la Habitación en la base de datos: " + e.getMessage());
         }
     }
@@ -55,7 +58,7 @@ public class DaoHabitaciones {
             statement.executeUpdate();
             System.out.println("Habitacion eliminado exitosamente de la base de datos.");
         } catch (SQLException e) {
-            e.printStackTrace();
+           
             System.err.println("Error al eliminar el Habitacion de la base de datos: " + e.getMessage());
         }
     }
@@ -77,7 +80,7 @@ public class DaoHabitaciones {
                 System.out.println("No se encontró ninguna habitación con el ID especificado.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+          
             System.err.println("Error al modificar la habitación: " + e.getMessage());
         }
     }
@@ -103,7 +106,7 @@ public class DaoHabitaciones {
                 System.out.println("No se encontró ningún Huesped con la clave: " + idHabitacion);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+        
             System.err.println("Error al buscar el Huesped: " + e.getMessage());
         }
         return habitacion;
@@ -128,6 +131,42 @@ public class DaoHabitaciones {
         }
         return null;
     }
+    public List<Habitacion> buscarHabitacionesDisponiblesPorTipoYFechas(String tipo, LocalDate fechaInicio, LocalDate fechaFin) throws SQLException {
+        con = getCon(); // Obtener la conexión
+        List<Habitacion> habitacionesDisponibles = new ArrayList<>();
+        String sql = "SELECT * FROM habitacion h " +
+                     "WHERE h.tipoHabitacion = ? " +
+                     "AND h.disponibilidad = true " +
+                     "AND h.idHabitacion NOT IN ( " +
+                     "    SELECT r.idHabitacion " +
+                     "    FROM reservaciones r " +
+                     "    WHERE (r.fechaLlegada <= ? AND r.fechaSalida >= ?) " +
+                     ");";
     
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, tipo);
+            statement.setDate(2, java.sql.Date.valueOf(fechaFin));
+            statement.setDate(3, java.sql.Date.valueOf(fechaInicio));
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Habitacion habitacion = new Habitacion(
+                        resultSet.getInt("idHabitacion"),
+                        resultSet.getString("tipoHabitacion"),
+                        resultSet.getString("camas"),
+                        resultSet.getDouble("precio"),
+                        resultSet.getBoolean("disponibilidad")
+                    );
+                    habitacionesDisponibles.add(habitacion);
+                }
+            }
+        } catch (SQLException e) {
+          
+            System.err.println("Error al buscar habitaciones disponibles: " + e.getMessage());
+        }
+        return habitacionesDisponibles;
+    }
+    
+    
+
 
 }

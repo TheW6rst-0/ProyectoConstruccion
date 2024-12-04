@@ -1,19 +1,20 @@
 package com.construccion.proyecto.dao;
-import com.construccion.proyecto.model.Empleado;
-import java.util.ArrayList;
-import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.construccion.proyecto.model.Empleado;
 
 
 public class DaoEmpleado {
     private Connection con = null;
-    private String host = "jdbc:mysql://localhost:3306/hotel";
-    private String user = "root";
-    private String pass = "";
+    private final String host = "jdbc:mysql://localhost:3306/hotel";
+    private final String user = "root";
+    private final String pass = "";
 
     public DaoEmpleado() {
     }
@@ -24,7 +25,7 @@ public class DaoEmpleado {
             con = DriverManager.getConnection(host, user, pass);
             System.out.println("Conexion exitosa");
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+           
         }
         return con;
     }
@@ -40,7 +41,7 @@ public class DaoEmpleado {
             statement.executeUpdate();
             System.out.println("Empleado guardado exitosamente en la base de datos.");
         } catch (SQLException e) {
-            e.printStackTrace();
+          
             System.err.println("Error al guardar el Empleado en la base de datos: " + e.getMessage());
         }
     }
@@ -53,7 +54,7 @@ public class DaoEmpleado {
             statement.executeUpdate();
             System.out.println("Empleado eliminado exitosamente de la base de datos.");
         } catch (SQLException e) {
-            e.printStackTrace();
+            
             System.err.println("Error al eliminar el Empleado de la base de datos: " + e.getMessage());
         }
     }
@@ -74,7 +75,7 @@ public class DaoEmpleado {
                 System.out.println("No se encontró ningún empleado con la clave especificada.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           
             System.err.println("Error al modificar el empleado: " + e.getMessage());
         }
     }
@@ -102,7 +103,7 @@ public class DaoEmpleado {
                 System.out.println("No se encontró ningún empleado con la clave: " + clave);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            
             System.err.println("Error al buscar el empleado: " + e.getMessage());
         }
     }
@@ -121,7 +122,7 @@ public class DaoEmpleado {
                 empleados.add(new Empleado(claveEmp, nombre, usuario, contrasenia, rol));   
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+        
             System.err.println("Error al obtener los Huespedes: " + e.getMessage());
         }
         return empleados;
@@ -144,7 +145,7 @@ public class DaoEmpleado {
                 return new Empleado(claveEmp, nombreEmp, usuario, contrasenia, rol);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+          
             System.err.println("Error al validar las credenciales: " + e.getMessage());
         }
         return null; // Si no se encuentra el usuario

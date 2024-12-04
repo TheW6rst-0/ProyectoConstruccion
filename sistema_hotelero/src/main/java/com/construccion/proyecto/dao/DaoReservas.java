@@ -1,19 +1,20 @@
 package com.construccion.proyecto.dao;
-import com.construccion.proyecto.model.Reservacion;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.construccion.proyecto.model.Reservacion;
 
 public class DaoReservas {
     private Connection con = null;
-    private String host = "jdbc:mysql://localhost:3306/hotel";
-    private String user = "root";
-    private String pass = "";
+    private final String host = "jdbc:mysql://localhost:3306/hotel";
+    private final String user = "root";
+    private final String pass = "";
 
 
 
@@ -23,7 +24,7 @@ public class DaoReservas {
             con = DriverManager.getConnection(host, user, pass);
             
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            
         }
         return con;
     }
@@ -43,7 +44,7 @@ public class DaoReservas {
             statement.executeUpdate();
             System.out.println("Reservación guardada exitosamente en la base de datos.");
         } catch (SQLException e) {
-            e.printStackTrace();
+           
             System.err.println("Error al guardar la reservación en la base de datos: " + e.getMessage());
         }
     }
@@ -57,7 +58,7 @@ public class DaoReservas {
             statement.executeUpdate();
             System.out.println("Reservacion eliminado exitosamente de la base de datos.");
         } catch (SQLException e) {
-            e.printStackTrace();
+            
             System.err.println("Error al eliminar el Reservacion de la base de datos: " + e.getMessage());
         }
     }
@@ -82,7 +83,7 @@ public class DaoReservas {
                 System.out.println("No se encontró ninguna reservación con el ID especificado.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            
             System.err.println("Error al modificar la reservación: " + e.getMessage());
         }
     }
@@ -102,7 +103,7 @@ public class DaoReservas {
                 reservaciones.add(new Reservacion(idReservacion, idHuesped, idHabitacion, fechaLlegada.toLocalDate(), fechaSalida.toLocalDate())); 
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           
             System.err.println("Error al obtener los Huespedes: " + e.getMessage());
         }
         return reservaciones;
@@ -128,7 +129,7 @@ public class DaoReservas {
                 System.out.println("No se encontró ningún Huesped con la clave: " + idReservacion);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            
             System.err.println("Error al buscar el Huesped: " + e.getMessage());
         }
     }

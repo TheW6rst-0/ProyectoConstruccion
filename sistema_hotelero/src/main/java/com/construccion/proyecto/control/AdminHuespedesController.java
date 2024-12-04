@@ -24,9 +24,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 public class AdminHuespedesController implements SceneAware, Initializable {
-    private DaoHuesped daoHuesped = new DaoHuesped();
-    private DaoReservas daoReservas = new DaoReservas();
-    private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
+    private final DaoHuesped daoHuesped = new DaoHuesped();
+    private final DaoReservas daoReservas = new DaoReservas();
+    private final DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
 
 
     @FXML
