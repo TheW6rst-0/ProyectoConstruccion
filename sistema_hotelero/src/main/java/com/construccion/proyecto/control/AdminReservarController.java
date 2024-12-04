@@ -21,6 +21,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 
 public class AdminReservarController implements SceneAware{
@@ -136,6 +137,14 @@ public class AdminReservarController implements SceneAware{
         sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
     }
      public void initialize() {
+        // Crear un grupo para los RadioButtons
+        ToggleGroup grupoPago = new ToggleGroup();
+        btnEfectivo.setToggleGroup(grupoPago);
+        btnTarjeta.setToggleGroup(grupoPago);
+
+        // Configurar comportamiento de los RadioButtons
+        btnTarjeta.setOnAction(event -> manejarSeleccionTarjeta());
+        btnEfectivo.setOnAction(event -> manejarSeleccionEfectivo());
     // Configurar opciones del ChoiceBox
     choiceTipo.getItems().addAll("SNG", "DBL", "ST");
 
@@ -218,8 +227,19 @@ void btnProcederClicked(ActionEvent event) {
     }
 }
 
+private void manejarSeleccionTarjeta() {
+    // Deshabilitar y limpiar txtMonto al seleccionar tarjeta
+    txtMonto.clear();
+    txtMonto.setDisable(true);
+}
+
+private void manejarSeleccionEfectivo() {
+    // Habilitar txtMonto al seleccionar efectivo
+    txtMonto.setDisable(false);
+
 
     }
+}
 
 
 
