@@ -45,9 +45,6 @@ public class AdminVentasController implements SceneAware{
     private TableColumn<?, ?> colHuesped;
 
     @FXML
-    private TableColumn<?, ?> colNoches;
-
-    @FXML
     private TableColumn<?, ?> colNum;
 
     @FXML

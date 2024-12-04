@@ -21,6 +21,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 
 public class AdminReservarController implements SceneAware{
@@ -91,6 +92,8 @@ public class AdminReservarController implements SceneAware{
     @FXML
     private TextField txtNombre;
 
+    @FXML
+    private TextField txtMonto;
 
     @FXML
     private TextField txtPrecio;
@@ -134,6 +137,14 @@ public class AdminReservarController implements SceneAware{
         sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
     }
      public void initialize() {
+        // Crear un grupo para los RadioButtons
+        ToggleGroup grupoPago = new ToggleGroup();
+        btnEfectivo.setToggleGroup(grupoPago);
+        btnTarjeta.setToggleGroup(grupoPago);
+
+        // Configurar comportamiento de los RadioButtons
+        btnTarjeta.setOnAction(event -> manejarSeleccionTarjeta());
+        btnEfectivo.setOnAction(event -> manejarSeleccionEfectivo());
     // Configurar opciones del ChoiceBox
     choiceTipo.getItems().addAll("SNG", "DBL", "ST");
 
@@ -145,6 +156,8 @@ public class AdminReservarController implements SceneAware{
                 reserva.setIdHabitacion(habitacion.getIdHabitacion());
                 if (habitacion != null) {
                     actualizarInfoHabitacion(habitacion);
+                } else {
+                    mostrarMensaje("No se encontró una habitación disponible para el tipo seleccionado.");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -182,10 +195,10 @@ void btnProcederClicked(ActionEvent event) {
         // Configurar datos del huésped
         huesped.setNombre(txtNombre.getText());
         huesped.setEmail(txtCorreo.getText());
-        huesped.setIdTarjeta(235);
+        huesped.setIdtarjeta(235);
         daoHuesped.agregarHuesped(huesped);
        huesped = daoHuesped.buscarHuesped(txtNombre.getText());
-        int idHuesped = huesped.getIdHuesped();
+        int idHuesped = huesped.getIdhuesped();
         
 
         // Configurar datos de la reservación
@@ -214,8 +227,19 @@ void btnProcederClicked(ActionEvent event) {
     }
 }
 
+private void manejarSeleccionTarjeta() {
+    // Deshabilitar y limpiar txtMonto al seleccionar tarjeta
+    txtMonto.clear();
+    txtMonto.setDisable(true);
+}
+
+private void manejarSeleccionEfectivo() {
+    // Habilitar txtMonto al seleccionar efectivo
+    txtMonto.setDisable(false);
+
 
     }
+}
 
 
 

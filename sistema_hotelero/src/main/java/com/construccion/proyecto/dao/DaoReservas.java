@@ -1,13 +1,17 @@
 package com.construccion.proyecto.dao;
-import com.construccion.proyecto.model.Reservacion;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.construccion.proyecto.model.Reservacion;
 
 public class DaoReservas {
     private Connection con = null;
@@ -21,7 +25,7 @@ public class DaoReservas {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(host, user, pass);
-            
+            System.out.println("Conexion exitosa");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -86,36 +90,16 @@ public class DaoReservas {
             System.err.println("Error al modificar la reservación: " + e.getMessage());
         }
     }
-        
-    public List<Reservacion> obtenerReservaciones() throws SQLException {
-        con = getCon();
-        List<Reservacion> reservaciones = new ArrayList<>();
-        String sqlConsulta = "SELECT * FROM reservaciones";
-        try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int idReservacion = resultSet.getInt("idReservacion");
-                int idHuesped = resultSet.getInt("idHuesped");
-                int idHabitacion = resultSet.getInt("idHabitacion");
-                Date fechaLlegada = resultSet.getDate("fechaLlegada");
-                Date fechaSalida = resultSet.getDate("fechaSalida");
-                reservaciones.add(new Reservacion(idReservacion, idHuesped, idHabitacion, fechaLlegada.toLocalDate(), fechaSalida.toLocalDate())); 
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.err.println("Error al obtener los Huespedes: " + e.getMessage());
-        }
-        return reservaciones;
-    }   
-
     
 
     public void buscarReservacion(int idReservacion) throws SQLException {
         con = getCon();
-        String sqlConsulta = "SELECT * FROM reservaciones WHERE idReservacion = ?";
+        String sqlConsulta = "SELECT * FROM reservaciones WHERE idResercion = ?";
         try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
             statement.setInt(1, idReservacion);
             ResultSet resultSet = statement.executeQuery();
+
+
             if (resultSet.next()) {
                 int id = resultSet.getInt("idReservacion");
 
@@ -132,5 +116,42 @@ public class DaoReservas {
             System.err.println("Error al buscar el Huesped: " + e.getMessage());
         }
     }
+
+    public Map<Integer, List<LocalDate>> obtenerFechasOcupadasPorHabitacion() throws SQLException {
+    String sql = "SELECT idHabitacion, fechaLlegada, fechaSalida FROM reservaciones";
+    con = getCon();
+    Map<Integer, List<LocalDate>> fechasOcupadas = new HashMap<>();
+    try (PreparedStatement statement = con.prepareStatement(sql)) {
+        ResultSet rs = statement.executeQuery();
+        while (rs.next()) {
+            int idHabitacion = rs.getInt("idHabitacion");
+            LocalDate fechaLlegada = rs.getDate("fechaLlegada").toLocalDate();
+            LocalDate fechaSalida = rs.getDate("fechaSalida").toLocalDate();
+
+            fechasOcupadas.putIfAbsent(idHabitacion, new ArrayList<>());
+            fechasOcupadas.get(idHabitacion).add(fechaLlegada);
+            fechasOcupadas.get(idHabitacion).add(fechaSalida);  // Otras fechas de ocupación
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new SQLException("Error al obtener las fechas ocupadas: " + e.getMessage());
+    }
+    return fechasOcupadas;
+}
+
+public boolean eliminarReservacion(int idReservacion) throws SQLException {
+    con = getCon();
+    String sql = "DELETE FROM reservaciones WHERE idReservacion = ?";
+    try (PreparedStatement statement = con.prepareStatement(sql)) {
+        statement.setInt(1, idReservacion);
+        int rowsAffected = statement.executeUpdate();
+        
+        return rowsAffected > 0; // Retornamos true si se eliminó alguna fila
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new SQLException("Error al eliminar la reservación: " + e.getMessage());
+    }
+}
+
 
 }

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -90,14 +91,25 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="771.0">
                <children>
-                  <TableView fx:id="tblEmpleado" prefHeight="529.0" prefWidth="773.0">
+                  <TableView layoutY="114.0" prefHeight="415.0" prefWidth="773.0">
                     <columns>
-                      <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
                       <TableColumn fx:id="colNombre" prefWidth="377.0" text="Nombre" />
                         <TableColumn fx:id="colUsuario" prefWidth="141.0" text="Usuario" />
-                        <TableColumn fx:id="colContrasenia" prefWidth="179.0" text="Contraseña" />
+                        <TableColumn fx:id="colContraseña" prefWidth="179.0" text="Contraseña" />
                     </columns>
                   </TableView>
+                  <TextField fx:id="txtNombre" layoutX="438.0" layoutY="15.0" />
+                  <TextField fx:id="txtUsuario" layoutX="438.0" layoutY="49.0" />
+                  <TextField fx:id="txtContrasena" layoutX="438.0" layoutY="82.0" />
+                  <TextField fx:id="txtID" layoutX="138.0" layoutY="37.0" prefHeight="25.0" prefWidth="46.0" />
+                  <Label layoutX="118.0" layoutY="41.0" text="ID" />
+                  <Button fx:id="btnID" layoutX="118.0" layoutY="70.0" mnemonicParsing="false" onAction="#btnIDClicked" prefHeight="25.0" prefWidth="66.0" text="Buscar" />
+                  <Button fx:id="btnModificar" layoutX="617.0" layoutY="29.0" mnemonicParsing="false" onAction="#btnModificarClicked" text="Modificar" />
+                  <Label layoutX="385.0" layoutY="23.0" text="Nombre" />
+                  <Label layoutX="386.0" layoutY="53.0" text="Usuario" />
+                  <Label layoutX="367.0" layoutY="86.0" text="Contraseña" />
+                  <Button fx:id="btnBorrar" layoutX="618.0" layoutY="70.0" mnemonicParsing="false" onAction="#btnBorrarClicked" prefHeight="25.0" prefWidth="66.0" text="Borrar" />
                </children></AnchorPane>
         </content>
       </ScrollPane>
