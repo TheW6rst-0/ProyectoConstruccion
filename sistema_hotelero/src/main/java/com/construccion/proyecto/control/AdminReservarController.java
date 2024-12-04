@@ -2,6 +2,7 @@ package com.construccion.proyecto.control;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import com.construccion.proyecto.dao.DaoHabitaciones;
 import com.construccion.proyecto.dao.DaoHuesped;
@@ -34,6 +35,7 @@ public class AdminReservarController implements SceneAware{
     private DaoTarjeta daoTarjeta = new DaoTarjeta();
     private Tarjeta tarjeta = daoTarjeta.buscarTarjeta(235);
     private Pago pago = new Pago();
+    private double total;
     @FXML
     private Button btnCerrar;
 
@@ -42,7 +44,7 @@ public class AdminReservarController implements SceneAware{
 
     @FXML
     private RadioButton btnEfectivo;
-
+   
     @FXML
     private Button btnEmpleados;
 
@@ -137,6 +139,7 @@ public class AdminReservarController implements SceneAware{
         sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
     }
      public void initialize() {
+<<<<<<< Updated upstream
         // Crear un grupo para los RadioButtons
         ToggleGroup grupoPago = new ToggleGroup();
         btnEfectivo.setToggleGroup(grupoPago);
@@ -145,10 +148,24 @@ public class AdminReservarController implements SceneAware{
         // Configurar comportamiento de los RadioButtons
         btnTarjeta.setOnAction(event -> manejarSeleccionTarjeta());
         btnEfectivo.setOnAction(event -> manejarSeleccionEfectivo());
+=======
+        fechaLlegada.valueProperty().addListener((observable, oldValue, newValue) -> calcularPago());
+
+    // Listener para actualizar el cálculo cuando cambie fechaSalida
+    fechaSalida.valueProperty().addListener((observable, oldValue, newValue) -> calcularPago());
+         // Crear un grupo para los RadioButtons
+         ToggleGroup grupoPago = new ToggleGroup();
+         btnEfectivo.setToggleGroup(grupoPago);
+         btnTarjeta.setToggleGroup(grupoPago);
+         // Configurar comportamiento de los RadioButtons
+         btnTarjeta.setOnAction(event -> manejarSeleccionTarjeta());
+         btnEfectivo.setOnAction(event -> manejarSeleccionEfectivo());
+>>>>>>> Stashed changes
     // Configurar opciones del ChoiceBox
     choiceTipo.getItems().addAll("SNG", "DBL", "ST");
 
     // Listener para cuando se seleccione un tipo de habitación
+<<<<<<< Updated upstream
     choiceTipo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
         if (newValue != null) {
             try {
@@ -162,9 +179,40 @@ public class AdminReservarController implements SceneAware{
             } catch (SQLException e) {
                 e.printStackTrace();
                 mostrarMensaje("Error al buscar habitaciones en la base de datos.");
+=======
+   choiceTipo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    if (newValue != null && fechaLlegada.getValue() != null && fechaSalida.getValue() != null) {
+        try {
+            List<Habitacion> habitacionesDisponibles = daoHabitaciones.buscarHabitacionesDisponiblesPorTipoYFechas(
+                newValue, 
+                fechaLlegada.getValue(), 
+                fechaSalida.getValue()
+            );
+            if (habitacionesDisponibles.isEmpty()) {
+                mostrarMensaje("No hay habitaciones disponibles para este tipo y rango de fechas.");
+            } else {
+                Habitacion habitacionSeleccionada = habitacionesDisponibles.get(0); // Selecciona una habitación disponible
+                reserva.setIdHabitacion(habitacionSeleccionada.getIdHabitacion());
+                actualizarInfoHabitacion(habitacionSeleccionada);
+>>>>>>> Stashed changes
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarMensaje("Error al verificar la disponibilidad de habitaciones.");
         }
-    });
+    }
+});
+
+}
+
+private void manejarSeleccionTarjeta() {
+    // Deshabilitar y limpiar txtMonto al seleccionar tarjeta
+    txtMonto.clear();
+    txtMonto.setDisable(true);
+}
+private void manejarSeleccionEfectivo() {
+    // Habilitar txtMonto al seleccionar efectivo
+    txtMonto.setDisable(false);
 }
 
 // Método auxiliar para actualizar la interfaz con la información de la habitación
@@ -178,20 +226,49 @@ private void mostrarMensaje(String mensaje) {
     System.out.println(mensaje);
 }
 @FXML
+private void calcularPago() {
+    LocalDate date1 = fechaLlegada.getValue();
+    LocalDate date2 = fechaSalida.getValue();
+
+    // Validaciones
+    if (date1 == null || date2 == null || date1.isAfter(date2)) {
+        txtNoches.clear();
+        txtTotal.clear();
+        System.out.println("Fechas inválidas. Por favor, verifica.");
+        return;
+    }
+
+    if (txtNombre.getText().isEmpty() || txtCorreo.getText().isEmpty()) {
+        txtNoches.clear();
+        txtTotal.clear();
+        System.out.println("Por favor, complete los campos obligatorios.");
+        return;
+    }
+
+    // Calcular noches y total
+    long noches = ChronoUnit.DAYS.between(date1, date2);
+    double precio;
+    try {
+        precio = Double.parseDouble(txtPrecio.getText());
+    } catch (NumberFormatException e) {
+        System.out.println("Precio inválido. Por favor, verifica.");
+        return;
+    }
+
+     total = noches * precio;
+    txtNoches.setText(String.valueOf(noches));
+    txtTotal.setText(String.format("%.2f", total));
+
+    // Opciones de pago
+   
+}
+
+   
+@FXML
 void btnProcederClicked(ActionEvent event) {
     try {
         LocalDate date1 = fechaLlegada.getValue();
         LocalDate date2 = fechaSalida.getValue();
-        if (date1 == null || date2 == null || date1.isAfter(date2)) {
-            System.out.println("Fechas inválidas. Por favor, verifica.");
-            return;
-        }
-
-        if (txtNombre.getText().isEmpty() || txtCorreo.getText().isEmpty()) {
-            System.out.println("Por favor, complete los campos obligatorios.");
-            return;
-        }
-
         // Configurar datos del huésped
         huesped.setNombre(txtNombre.getText());
         huesped.setEmail(txtCorreo.getText());
@@ -206,18 +283,17 @@ void btnProcederClicked(ActionEvent event) {
         reserva.setFechaLlegada(date1);
         reserva.setFechaSalida(date2);
 
-        long noches = ChronoUnit.DAYS.between(date1, date2);
-        double precio = Double.parseDouble(txtPrecio.getText());
-        double total = noches * precio;
-        txtNoches.setText(String.valueOf(noches));
-        txtTotal.setText(String.valueOf(total));
-
+       
         if (btnTarjeta.isSelected()) {
-            pago.pagoTarjeta(tarjeta, total);
-        } else if (btnEfectivo.isSelected()) {
-            pago.pagoEfectivo(total, total);
+            pago.pagoTarjeta(tarjeta, total); // Ajusta "tarjeta" según tu implementación
+        } else if (btnEfectivo.isSelected() && !txtMonto.getText().isEmpty()) {
+            try {
+                double efectivo = Double.parseDouble(txtMonto.getText());
+                pago.pagoEfectivo(total, efectivo);
+            } catch (NumberFormatException e) {
+                System.out.println("Monto de efectivo inválido. Por favor, verifica.");
+            }
         }
-
         // Guardar la reservación
         daoReservas.agregarReservacion(reserva);
 

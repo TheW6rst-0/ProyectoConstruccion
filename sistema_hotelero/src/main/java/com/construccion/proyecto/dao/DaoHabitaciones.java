@@ -4,6 +4,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.construccion.proyecto.model.Habitacion;
 
@@ -132,6 +135,42 @@ public class DaoHabitaciones {
         }
         return null;
     }
+    public List<Habitacion> buscarHabitacionesDisponiblesPorTipoYFechas(String tipo, LocalDate fechaInicio, LocalDate fechaFin) throws SQLException {
+        con = getCon(); // Obtener la conexión
+        List<Habitacion> habitacionesDisponibles = new ArrayList<>();
+        String sql = "SELECT * FROM habitacion h " +
+                     "WHERE h.tipoHabitacion = ? " +
+                     "AND h.disponibilidad = true " +
+                     "AND h.idHabitacion NOT IN ( " +
+                     "    SELECT r.idHabitacion " +
+                     "    FROM reservaciones r " +
+                     "    WHERE (r.fechaLlegada <= ? AND r.fechaSalida >= ?) " +
+                     ");";
     
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, tipo);
+            statement.setDate(2, java.sql.Date.valueOf(fechaFin));
+            statement.setDate(3, java.sql.Date.valueOf(fechaInicio));
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Habitacion habitacion = new Habitacion(
+                        resultSet.getInt("idHabitacion"),
+                        resultSet.getString("tipoHabitacion"),
+                        resultSet.getString("camas"),
+                        resultSet.getDouble("precio"),
+                        resultSet.getBoolean("disponibilidad")
+                    );
+                    habitacionesDisponibles.add(habitacion);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al buscar habitaciones disponibles: " + e.getMessage());
+        }
+        return habitacionesDisponibles;
+    }
+    
+    
+
 
 }
