@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.time.LocalDate;
@@ -219,6 +220,9 @@ public class AdminHuespedesController implements SceneAware, Initializable {
 
     private void cargarDatosEnTabla(List<InfoReservacion> infoReservaciones) {
         ObservableList<InfoReservacion> observableInfoReservacion = FXCollections.observableArrayList(infoReservaciones);
+        if(observableInfoReservacion.isEmpty()){
+            sceneManager.mostrarAlerta("No se encontraron resultados", "No se encontraron reservaciones con los criterios de búsqueda", AlertType.INFORMATION);
+        }
         tblHuesped.setItems(observableInfoReservacion);
         colEntrada.setCellValueFactory(new PropertyValueFactory<InfoReservacion, LocalDate>("fechaLlegada"));
         colNombre.setCellValueFactory(new PropertyValueFactory<InfoReservacion, String>("nombreHuesped"));

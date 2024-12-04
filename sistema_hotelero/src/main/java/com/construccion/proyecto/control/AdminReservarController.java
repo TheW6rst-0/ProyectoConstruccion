@@ -29,7 +29,6 @@ public class AdminReservarController implements SceneAware{
     private DaoHuesped daoHuesped = new DaoHuesped();
     private Huesped huesped = new Huesped(0, null, null, 0);
     private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
-    private Habitacion habitacion = new Habitacion(0, null, null, 0, false);
     private DaoTarjeta daoTarjeta = new DaoTarjeta();
     private Tarjeta tarjeta = daoTarjeta.buscarTarjeta(235);
     private Pago pago = new Pago();
