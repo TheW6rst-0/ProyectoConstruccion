@@ -28,7 +28,7 @@ import javafx.scene.control.ToggleGroup;
 public class AdminReservarController implements SceneAware {
     private final  DaoReservas daoReservas = new DaoReservas();
     private final Reservacion reserva = new Reservacion(0, 0, 0, null, null);
-    private  DaoHuesped daoHuesped = new DaoHuesped();
+    private DaoHuesped daoHuesped = new DaoHuesped();
     private Huesped huesped = new Huesped(0, null, null, 0);
     private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
     private DaoTarjeta daoTarjeta = new DaoTarjeta();
