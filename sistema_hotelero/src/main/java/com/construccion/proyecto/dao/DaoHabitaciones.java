@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.construccion.proyecto.model.Habitacion;
 
@@ -164,6 +166,71 @@ public class DaoHabitaciones {
             System.err.println("Error al buscar habitaciones disponibles: " + e.getMessage());
         }
         return habitacionesDisponibles;
+    }
+
+    public List<Integer> getHabitacionesPorTipo(String tipo) throws SQLException {
+        List<Integer> ids = new ArrayList<>();
+        String sql = "SELECT idHabitacion FROM habitacion WHERE tipoHabitacion = ?";
+        con = getCon();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, tipo);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                ids.add(resultSet.getInt("idHabitacion"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
+    }
+    
+    public boolean getDisponibilidadPorId(int idHabitacion) throws SQLException {
+        String sql = "SELECT disponibilidad FROM habitacion WHERE idHabitacion = ?";
+        con = getCon();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setInt(1, idHabitacion);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getBoolean("disponibilidad");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        throw new SQLException("No se encontró la habitación con ID: " + idHabitacion);
+    }
+    
+    public void actualizarDisponibilidad(int idHabitacion, boolean nuevaDisponibilidad) throws SQLException {
+        String sql = "UPDATE habitacion SET disponibilidad = ? WHERE idHabitacion = ?";
+        con = getCon();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setBoolean(1, nuevaDisponibilidad);
+            statement.setInt(2, idHabitacion);
+    
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Disponibilidad actualizada para ID: " + idHabitacion);
+            } else {
+                System.out.println("No se encontró ninguna habitación con el ID especificado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Error al actualizar la disponibilidad: " + e.getMessage());
+        }
+    }
+    
+    public List<Integer> getAllHabitaciones() throws SQLException {
+        List<Integer> ids = new ArrayList<>();
+        String sql = "SELECT idHabitacion FROM habitacion";
+        con = getCon();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                ids.add(resultSet.getInt("idHabitacion"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
     
     
