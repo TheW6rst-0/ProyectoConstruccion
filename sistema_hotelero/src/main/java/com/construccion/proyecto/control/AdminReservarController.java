@@ -173,8 +173,6 @@ public class AdminReservarController implements SceneAware{
                 reserva.setIdHabitacion(habitacion.getIdHabitacion());
                 if (habitacion != null) {
                     actualizarInfoHabitacion(habitacion);
-                } else {
-                    mostrarMensaje("No se encontró una habitación disponible para el tipo seleccionado.");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -272,10 +270,10 @@ void btnProcederClicked(ActionEvent event) {
         // Configurar datos del huésped
         huesped.setNombre(txtNombre.getText());
         huesped.setEmail(txtCorreo.getText());
-        huesped.setIdtarjeta(235);
+        huesped.setIdTarjeta(235);
         daoHuesped.agregarHuesped(huesped);
        huesped = daoHuesped.buscarHuesped(txtNombre.getText());
-        int idHuesped = huesped.getIdhuesped();
+        int idHuesped = huesped.getIdHuesped();
         
 
         // Configurar datos de la reservación

@@ -93,11 +93,10 @@
                <children>
                   <TableView fx:id="tblHuesped" layoutX="-7.0" layoutY="46.0" prefHeight="482.0" prefWidth="782.0">
                     <columns>
-                      <TableColumn fx:id="colIDHuesped" editable="false" prefWidth="54.0" text="ID" />
+                      <TableColumn fx:id="colIdHuesped" editable="false" prefWidth="54.0" text="ID" />
                       <TableColumn fx:id="colNombre" editable="false" prefWidth="358.0" text="Nombre" />
-                        <TableColumn fx:id="colIDHabitacion" editable="false" prefWidth="49.0" text="ID Hab." />
+                        <TableColumn fx:id="colIdHabitacion" editable="false" prefWidth="49.0" text="ID Hab." />
                         <TableColumn fx:id="colTipo" editable="false" prefWidth="48.0" text="Tipo" />
-                        <TableColumn fx:id="colPersonas" editable="false" prefWidth="47.0" text="Per" />
                         <TableColumn fx:id="colEntrada" editable="false" prefWidth="74.0" text="Entrada" />
                         <TableColumn fx:id="colSalida" editable="false" prefWidth="74.0" text="Salida" />
                         <TableColumn fx:id="colReserva" editable="false" prefWidth="74.0" text="Reservacion" />

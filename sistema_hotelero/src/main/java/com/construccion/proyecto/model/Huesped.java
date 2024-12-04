@@ -2,14 +2,20 @@ package com.construccion.proyecto.model;
 
 public class Huesped {
     private String nombre;
-    private int idhuesped;
+    private int idHuesped;
     private String email;
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     private int idtarjeta;
+=======
+    private int idTarjeta;
+
+>>>>>>> deff216ee419cb11552f5f81f06fef5090b48499
     public Huesped( int id,String nombre, String email, int idtarjeta) {
-        this.idhuesped = id;
+        this.idHuesped = id;
         this.nombre = nombre;
         this.email = email;
+<<<<<<< HEAD
         this.idtarjeta = idtarjeta;
 =======
     private int idTarjeta;
@@ -20,6 +26,9 @@ public class Huesped {
         this.email = email;
         this.idTarjeta = idTarjeta;
 >>>>>>> Stashed changes
+=======
+        this.idTarjeta = idtarjeta;
+>>>>>>> deff216ee419cb11552f5f81f06fef5090b48499
     }
 
     public String getNombre() {
@@ -30,10 +39,11 @@ public class Huesped {
         this.nombre = nombre;
     }
 
-    public int getIdhuesped() {
-        return idhuesped;
+    public int getIdHuesped() {
+        return idHuesped;
     }
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     public void setIdhuesped(int idhuesped) {
         this.idhuesped = idhuesped;
@@ -41,6 +51,10 @@ public class Huesped {
     public void setIdHuesped(int idHuesped) {
         this.idHuesped = idHuesped;
 >>>>>>> Stashed changes
+=======
+    public void setIdHuesped(int idhuesped) {
+        this.idHuesped = idhuesped;
+>>>>>>> deff216ee419cb11552f5f81f06fef5090b48499
     }
 
     public String getEmail() {
@@ -51,10 +65,11 @@ public class Huesped {
         this.email = email;
     }
 
-    public int getIdtarjeta() {
-        return idtarjeta;
+    public int getIdTarjeta() {
+        return idTarjeta;
     }
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     public void setIdtarjeta(int idtarjeta) {
         this.idtarjeta = idtarjeta;
@@ -62,5 +77,9 @@ public class Huesped {
     public void setIdTarjeta(int idTarjeta) {
         this.idTarjeta = idTarjeta;
 >>>>>>> Stashed changes
+=======
+    public void setIdTarjeta(int idtarjeta) {
+        this.idTarjeta = idtarjeta;
+>>>>>>> deff216ee419cb11552f5f81f06fef5090b48499
     }
 }

@@ -90,12 +90,12 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="771.0">
                <children>
-                  <TableView prefHeight="529.0" prefWidth="773.0">
+                  <TableView fx:id="tblEmpleado" prefHeight="529.0" prefWidth="773.0">
                     <columns>
-                      <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
                       <TableColumn fx:id="colNombre" prefWidth="377.0" text="Nombre" />
                         <TableColumn fx:id="colUsuario" prefWidth="141.0" text="Usuario" />
-                        <TableColumn fx:id="colContraseña" prefWidth="179.0" text="Contraseña" />
+                        <TableColumn fx:id="colContrasenia" prefWidth="179.0" text="Contraseña" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
