@@ -10,9 +10,9 @@ import java.util.List;
 import com.construccion.proyecto.model.Huesped;
 public class DaoHuesped {
     private Connection con = null;
-    private String host = "jdbc:mysql://localhost:3306/hotel";
-    private String user = "root";
-    private String pass = "";
+    private final String host = "jdbc:mysql://localhost:3306/hotel";
+    private final String user = "root";
+    private final String pass = "";
 
 
 
@@ -22,7 +22,7 @@ public class DaoHuesped {
             con = DriverManager.getConnection(host, user, pass);
             
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+        
         }
         return con;
     }
@@ -99,7 +99,7 @@ public class DaoHuesped {
                 System.out.println("No se encontró ningún Huesped con la clave: " + idHuesped);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           
             System.err.println("Error al buscar el Huesped: " + e.getMessage());
         }
         return huesped;
@@ -121,7 +121,7 @@ public class DaoHuesped {
                 huespedes.add(huesped);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            
             System.err.println("Error al obtener los Huespedes: " + e.getMessage());
         }
         return huespedes;
@@ -144,7 +144,7 @@ public class DaoHuesped {
                 System.out.println("No se encontró ningún Huesped con el nombre: " + nombreHuesped);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           
             System.err.println("Error al buscar el Huesped: " + e.getMessage());
         }
         return huesped;

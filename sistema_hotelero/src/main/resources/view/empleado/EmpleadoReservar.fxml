@@ -67,11 +67,6 @@
             </Pane>
          </children>
       </Pane>
-      <ScrollPane layoutX="163.0" layoutY="82.0" prefHeight="529.0" prefWidth="773.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
       <Pane layoutX="-7.0" layoutY="-9.0" prefHeight="90.0" prefWidth="947.0" style="-fx-background-color: #191919;">
          <children>
             <ImageView fitHeight="53.0" fitWidth="183.0" layoutX="27.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
@@ -79,7 +74,12 @@
                   <Image url="@../../images/logo.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="681.0" layoutY="32.0" prefHeight="26.0" prefWidth="252.0" text="Username Here" textAlignment="RIGHT" textFill="#d89b3f">
+            <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="681.0" layoutY="42.0" prefHeight="26.0" prefWidth="252.0" text="Username Here" textAlignment="RIGHT" textFill="#d89b3f">
+               <font>
+                  <Font name="Britannic Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblUsername1" alignment="CENTER_RIGHT" layoutX="681.0" layoutY="16.0" prefHeight="26.0" prefWidth="252.0" text="Administrador" textAlignment="RIGHT" textFill="#d89b3f">
                <font>
                   <Font name="Britannic Bold" size="24.0" />
                </font>
@@ -88,26 +88,20 @@
       </Pane>
       <Pane layoutX="168.0" layoutY="93.0" prefHeight="79.0" prefWidth="764.0" style="-fx-background-color: #E9E9E9;">
          <children>
-            <Label layoutX="14.0" layoutY="6.0" text="Estancia y Personas" />
+            <Label layoutX="14.0" layoutY="6.0" text="Estancia" />
             <DatePicker fx:id="fechaLlegada" layoutX="126.0" layoutY="27.0" />
             <DatePicker fx:id="fechaSalida" layoutX="403.0" layoutY="27.0" />
             <Label layoutX="40.0" layoutY="31.0" text="Fecha Llegada" />
             <Label layoutX="331.0" layoutY="31.0" text="Fecha Salida" />
-            <Label layoutX="620.0" layoutY="31.0" text="Personas" />
-            <TextField fx:id="txtPersonas" layoutX="674.0" layoutY="27.0" prefHeight="25.0" prefWidth="47.0" />
          </children>
       </Pane>
       <Pane layoutX="168.0" layoutY="276.0" prefHeight="231.0" prefWidth="764.0" style="-fx-background-color: #E9E9E9;">
          <children>
             <Label layoutX="14.0" layoutY="6.0" text="Datos del Huesped" />
             <TextField fx:id="txtNombre" layoutX="225.0" layoutY="42.0" prefHeight="25.0" prefWidth="399.0" />
-            <TextField fx:id="txtDireccion" layoutX="225.0" layoutY="80.0" prefHeight="25.0" prefWidth="399.0" />
             <TextField fx:id="txtCorreo" layoutX="225.0" layoutY="116.0" prefHeight="25.0" prefWidth="399.0" />
             <Label layoutX="103.0" layoutY="46.0" text="Nombre de Huesped" />
-            <Label layoutX="164.0" layoutY="84.0" text="Direccion" />
             <Label layoutX="115.0" layoutY="120.0" text="Correo Electronico" />
-            <TextField fx:id="txtDocumento" layoutX="225.0" layoutY="157.0" prefHeight="25.0" prefWidth="399.0" />
-            <Label layoutX="92.0" layoutY="161.0" text="Documento Entregado" />
          </children>
       </Pane>
       <Pane layoutX="168.0" layoutY="184.0" prefHeight="79.0" prefWidth="764.0" style="-fx-background-color: #E9E9E9;">
@@ -120,7 +114,7 @@
             <Label layoutX="343.0" layoutY="31.0" text="Precio" />
             <Label layoutX="514.0" layoutY="31.0" text="Cuarto Disponible" />
             <TextField fx:id="txtDisponibilidad" editable="false" layoutX="617.0" layoutY="27.0" prefHeight="25.0" prefWidth="57.0" />
-            <ChoiceBox layoutX="106.0" layoutY="27.0" prefHeight="25.0" prefWidth="85.0" />
+            <ChoiceBox fx:id="choiceTipo" layoutX="106.0" layoutY="27.0" prefHeight="25.0" prefWidth="85.0" />
          </children>
       </Pane>
       <Pane layoutX="168.0" layoutY="519.0" prefHeight="79.0" prefWidth="370.0" style="-fx-background-color: #e9e9e9;">
@@ -136,7 +130,7 @@
          <children>
             <RadioButton fx:id="btnEfectivo" layoutX="57.0" layoutY="31.0" mnemonicParsing="false" selected="true" text="Efectivo" />
             <RadioButton fx:id="btnTarjeta" layoutX="57.0" layoutY="57.0" mnemonicParsing="false" text="Tarjeta" />
-            <Button fx:id="btnProceder" layoutX="222.0" layoutY="45.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Proceder a Pago" />
+            <Button fx:id="btnProceder" layoutX="222.0" layoutY="45.0" mnemonicParsing="false" onAction="#btnProcederClicked" prefHeight="25.0" prefWidth="134.0" text="Proceder a Pago" />
             <Label layoutX="14.0" layoutY="6.0" text="Formas de Pago" />
          </children>
       </Pane>

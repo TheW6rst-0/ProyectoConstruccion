@@ -11,9 +11,9 @@ import com.construccion.proyecto.model.Tarjeta;
 
 public class DaoTarjeta {
     private Connection con = null;
-    private String host = "jdbc:mysql://localhost:3306/hotel";
-    private String user = "root";
-    private String pass = "";
+    private final String host = "jdbc:mysql://localhost:3306/hotel";
+    private final String user = "root";
+    private final String pass = "";
 
 
 
@@ -23,7 +23,7 @@ public class DaoTarjeta {
             con = DriverManager.getConnection(host, user, pass);
             System.out.println("Conexion exitosa");
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+           
         }
         return con;
     }
@@ -58,7 +58,7 @@ public class DaoTarjeta {
             statement.executeUpdate();
             System.out.println("Tarjeta eliminado exitosamente de la base de datos.");
         } catch (SQLException e) {
-            e.printStackTrace();
+           
             System.err.println("Error al Tarjeta el Huesped de la base de datos: " + e.getMessage());
         }
     }
@@ -89,7 +89,7 @@ public class DaoTarjeta {
                 System.out.println("No se encontró ninguna tarjeta con el ID: " + idTarjeta);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+           
             System.err.println("Error al buscar la tarjeta: " + e.getMessage());
         }
         return null; // Retornar null si no se encontró la tarjeta
