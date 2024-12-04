@@ -44,8 +44,7 @@ public class EmpleadoReservarController implements SceneAware {
     private ChoiceBox<String> choiceTipo;
     @FXML
     private DatePicker fechaLlegada, fechaSalida;
-    @FXML
-    private Label lblUsername, lblUsername1;
+
     @FXML
     private TextField txtCamas, txtCorreo, txtDisponibilidad, txtNoches, txtNombre, txtMonto, txtPrecio, txtTotal;
 
