@@ -32,7 +32,7 @@ public class DaoReservas {
         return con;
     }
 
-    public void agregarReservacion(Reservacion reservacion) throws SQLException {
+    public boolean agregarReservacion(Reservacion reservacion) throws SQLException {
         con = getCon();
         String sql = "INSERT INTO reservaciones (idReservacion, idHuesped, idHabitacion, fechaLlegada, fechaSalida) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
@@ -45,24 +45,24 @@ public class DaoReservas {
             statement.setDate(5, java.sql.Date.valueOf(reservacion.getFechaSalida()));
 
             statement.executeUpdate();
-            System.out.println("Reservación guardada exitosamente en la base de datos.");
+            return true;
         } catch (SQLException e) {
            
-            System.err.println("Error al guardar la reservación en la base de datos: " + e.getMessage());
+            return false;
         }
     }
 
 
-    public void eliminarHuesped(Reservacion reservacion) throws SQLException {
+    public boolean eliminarHuesped(Reservacion reservacion) throws SQLException {
         con = getCon();
         String sql = "DELETE FROM reservaciones WHERE idReservacion=?";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, reservacion.getIdReservacion());
             statement.executeUpdate();
-            System.out.println("Reservacion eliminado exitosamente de la base de datos.");
+            return true;
         } catch (SQLException e) {
             
-            System.err.println("Error al eliminar el Reservacion de la base de datos: " + e.getMessage());
+           return false;
         }
     }
 
@@ -114,28 +114,27 @@ public class DaoReservas {
 
     
 
-    public void buscarReservacion(int idReservacion) throws SQLException {
+    public Reservacion buscarReservacion(int idReservacion) throws SQLException {
         con = getCon();
         String sqlConsulta = "SELECT * FROM reservaciones WHERE idReservacion = ?";
         try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
             statement.setInt(1, idReservacion);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                int id = resultSet.getInt("idReservacion");
-
-
-
-                System.out.println("Información del Reservacion:");
-                System.out.println("ID Huesped: " + id);
-
+                int idHuesped = resultSet.getInt("idHuesped");
+                int idHabitacion = resultSet.getInt("idHabitacion");
+                LocalDate fechaLlegada = resultSet.getDate("fechaLlegada").toLocalDate();
+                LocalDate fechaSalida = resultSet.getDate("fechaSalida").toLocalDate();
+                return new Reservacion(idReservacion, idHuesped, idHabitacion, fechaLlegada, fechaSalida);
             } else {
-                System.out.println("No se encontró ningún Huesped con la clave: " + idReservacion);
+                return null; // Retorna null si no encuentra la reservación
             }
         } catch (SQLException e) {
-            
-            System.err.println("Error al buscar el Huesped: " + e.getMessage());
+            e.printStackTrace();
+            throw new SQLException("Error al buscar la reservación: " + e.getMessage());
         }
     }
+    
 
     public Map<Integer, List<LocalDate>> obtenerFechasOcupadasPorHabitacion() throws SQLException {
     String sql = "SELECT idHabitacion, fechaLlegada, fechaSalida FROM reservaciones";

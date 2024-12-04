@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -68,13 +69,13 @@
       </Pane>
       <ScrollPane layoutX="163.0" layoutY="82.0" prefHeight="529.0" prefWidth="773.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="522.0" prefWidth="771.0">
             <children>
-                  <TableView fx:id="tblHuesped" layoutX="-7.0" layoutY="-1.0" prefHeight="529.0" prefWidth="782.0">
+                  <TableView fx:id="tblHuesped" layoutX="-7.0" layoutY="75.0" prefHeight="453.0" prefWidth="782.0">
                     <columns>
-                      <TableColumn fx:id="colIDHuesped" editable="false" prefWidth="54.0" text="ID" />
+                      <TableColumn fx:id="colIdHuesped" editable="false" prefWidth="54.0" text="ID" />
                       <TableColumn fx:id="colNombre" editable="false" prefWidth="358.0" text="Nombre" />
-                        <TableColumn fx:id="colIDHabitacion" editable="false" prefWidth="49.0" text="ID Hab." />
+                        <TableColumn fx:id="colIdHabitacion" editable="false" prefWidth="49.0" text="ID Hab." />
                         <TableColumn fx:id="colTipo" editable="false" prefWidth="48.0" text="Tipo" />
                         <TableColumn fx:id="colPersonas" editable="false" prefWidth="47.0" text="Per" />
                         <TableColumn fx:id="colEntrada" editable="false" prefWidth="74.0" text="Entrada" />
@@ -82,12 +83,12 @@
                         <TableColumn fx:id="colReserva" editable="false" prefWidth="74.0" text="Reservacion" />
                     </columns>
                   </TableView>
-                  <TextField fx:id="txtNombre" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="358.0" promptText="Buscar por nombre" />
                   <Button fx:id="btnNombre" layoutX="378.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnNombreClicked" text="Buscar" />
-                  <TextField fx:id="txtCuarto" layoutX="456.0" layoutY="14.0" prefHeight="25.0" prefWidth="72.0" promptText="Cuarto" />
-                  <TextField fx:id="txtReservacion" layoutX="606.0" layoutY="14.0" prefHeight="25.0" prefWidth="92.0" promptText="Reservacion" />
                   <Button fx:id="btnCuarto" layoutX="535.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnCuartoClicked" text="Buscar" />
                   <Button fx:id="btnReservacion" layoutX="703.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnReservacionClicked" text="Buscar" />
+                  <TextField fx:id="txtNombre" layoutX="47.0" layoutY="14.0" prefHeight="25.0" prefWidth="315.0" promptText="Nombre de Huesped" />
+                  <TextField fx:id="txtReservacion" layoutX="613.0" layoutY="14.0" prefHeight="25.0" prefWidth="79.0" promptText="# Res" />
+                  <TextField fx:id="txtCuarto" layoutX="452.0" layoutY="14.0" prefHeight="25.0" prefWidth="75.0" promptText="# Cuarto" />
                </children></AnchorPane>
         </content>
       </ScrollPane>
@@ -98,11 +99,6 @@
                   <Image url="@../../images/logo.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="681.0" layoutY="32.0" prefHeight="26.0" prefWidth="252.0" text="Username Here" textAlignment="RIGHT" textFill="#d89b3f">
-               <font>
-                  <Font name="Britannic Bold" size="24.0" />
-               </font>
-            </Label>
          </children>
       </Pane>
    </children>

@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.construccion.proyecto.model.Habitacion;
 
@@ -31,7 +29,7 @@ public class DaoHabitaciones {
         return con;
     }
 
-    public void agregarHabitacioens(Habitacion habitacion) throws SQLException {
+    public void agregarHabitaciones(Habitacion habitacion) throws SQLException {
         con = getCon();
         String sql = "INSERT INTO habitacion (idHabitacion, tipoHabitacion, camas, precio, disponibilidad) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = con.prepareStatement(sql)) {

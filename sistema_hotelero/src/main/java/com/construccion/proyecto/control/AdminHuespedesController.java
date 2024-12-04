@@ -25,10 +25,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 public class AdminHuespedesController implements SceneAware, Initializable {
-    private final DaoHuesped daoHuesped = new DaoHuesped();
-    private final DaoReservas daoReservas = new DaoReservas();
-    private final DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
-
+    
 
     @FXML
     private Button btnCerrar;
@@ -129,6 +126,9 @@ public class AdminHuespedesController implements SceneAware, Initializable {
     void btnReservarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminReservar.fxml");
     }
+    private final DaoHuesped daoHuesped = new DaoHuesped();
+    private final DaoReservas daoReservas = new DaoReservas();
+    private final DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
 
     @FXML
     void btnCuartoClicked(ActionEvent event) {

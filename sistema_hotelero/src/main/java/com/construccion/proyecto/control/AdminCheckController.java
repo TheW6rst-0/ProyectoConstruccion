@@ -105,45 +105,7 @@ public void initialize() {
         e.printStackTrace();
     }
 }
-
-
-
-    @Override
-    public void setSceneManager(SceneManager sceneManager) {
-        this.sceneManager = sceneManager;
-    }
-
-    @FXML
-    void btnCerrarClicked(ActionEvent event) {
-        sceneManager.switchScene("/view/Login.fxml");
-    }
-
-    @FXML
-    void btnEmpleadosClicked(ActionEvent event) {
-        sceneManager.switchScene("/view/admin/AdminEmpleados.fxml");
-    }
-
-    @FXML
-    void btnHabitacionesClicked(ActionEvent event) {
-        sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
-    }
-
-    @FXML
-    void btnHuespedesClicked(ActionEvent event) {
-        sceneManager.switchScene("/view/admin/AdminHuespedes.fxml");
-    }
-
-    @FXML
-    void btnReservarClicked(ActionEvent event) {
-        sceneManager.switchScene("/view/admin/AdminReservar.fxml");
-    }
-
-    @FXML
-    void btnVentasClicked(ActionEvent event) {
-        sceneManager.switchScene("/view/admin/AdminVentas.fxml");
-    }
-
-   @FXML
+@FXML
     void btnCancelarClicked(ActionEvent event) {
     String idReservacionStr = txtReserva.getText(); // Obtener el texto del campo txtReservacion
 
@@ -242,6 +204,44 @@ void btnFiltrarClicked(ActionEvent event) {
         System.out.println("Número de habitación inválido.");
     }
 }
+
+
+    @Override
+    public void setSceneManager(SceneManager sceneManager) {
+        this.sceneManager = sceneManager;
+    }
+
+    @FXML
+    void btnCerrarClicked(ActionEvent event) {
+        sceneManager.switchScene("/view/Login.fxml");
+    }
+
+    @FXML
+    void btnEmpleadosClicked(ActionEvent event) {
+        sceneManager.switchScene("/view/admin/AdminEmpleados.fxml");
+    }
+
+    @FXML
+    void btnHabitacionesClicked(ActionEvent event) {
+        sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
+    }
+
+    @FXML
+    void btnHuespedesClicked(ActionEvent event) {
+        sceneManager.switchScene("/view/admin/AdminHuespedes.fxml");
+    }
+
+    @FXML
+    void btnReservarClicked(ActionEvent event) {
+        sceneManager.switchScene("/view/admin/AdminReservar.fxml");
+    }
+
+    @FXML
+    void btnVentasClicked(ActionEvent event) {
+        sceneManager.switchScene("/view/admin/AdminVentas.fxml");
+    }
+
+   
 
 
 

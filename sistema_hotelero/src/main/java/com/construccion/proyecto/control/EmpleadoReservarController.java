@@ -20,21 +20,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 public class EmpleadoReservarController implements SceneAware {
-    private final  DaoReservas daoReservas = new DaoReservas();
-    private final Reservacion reserva = new Reservacion(0, 0, 0, null, null);
-    private  DaoHuesped daoHuesped = new DaoHuesped();
-    private Huesped huesped = new Huesped(0, null, null, 0);
-    private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
-    private DaoTarjeta daoTarjeta = new DaoTarjeta();
-    private Tarjeta tarjeta = daoTarjeta.buscarTarjeta(235);
-    private Pago pago = new Pago();
-    private double total;
+  
 
     @FXML
     private Button btnCerrar, btnCheck, btnEmpleados, btnHabitaciones, btnHuespedes, btnProceder, btnVentas;
@@ -75,7 +66,15 @@ public class EmpleadoReservarController implements SceneAware {
     void btnHabitacionesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/empleado/EmpleadoDashboard.fxml");
     }
-
+    private final  DaoReservas daoReservas = new DaoReservas();
+    private final Reservacion reserva = new Reservacion(0, 0, 0, null, null);
+    private  DaoHuesped daoHuesped = new DaoHuesped();
+    private Huesped huesped = new Huesped(0, null, null, 0);
+    private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
+    private DaoTarjeta daoTarjeta = new DaoTarjeta();
+    private Tarjeta tarjeta = daoTarjeta.buscarTarjeta(235);
+    private Pago pago = new Pago();
+    private double total;
     public void initialize() {
           // Listener para actualizar el cálculo cuando cambie fechaLlegada
     fechaLlegada.valueProperty().addListener((observable, oldValue, newValue) -> calcularPago());

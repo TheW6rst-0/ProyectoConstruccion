@@ -26,16 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 public class AdminReservarController implements SceneAware {
-    private final  DaoReservas daoReservas = new DaoReservas();
-    private final Reservacion reserva = new Reservacion(0, 0, 0, null, null);
-    private DaoHuesped daoHuesped = new DaoHuesped();
-    private Huesped huesped = new Huesped(0, null, null, 0);
-    private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
-    private DaoTarjeta daoTarjeta = new DaoTarjeta();
-    private Tarjeta tarjeta = daoTarjeta.buscarTarjeta(235);
-    private Pago pago = new Pago();
-    private double total;
-
+ 
     @FXML
     private Button btnCerrar, btnCheck, btnEmpleados, btnHabitaciones, btnHuespedes, btnProceder, btnVentas;
     @FXML
@@ -85,6 +76,15 @@ public class AdminReservarController implements SceneAware {
     void btnHabitacionesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
     }
+    private final  DaoReservas daoReservas = new DaoReservas();
+    private final Reservacion reserva = new Reservacion(0, 0, 0, null, null);
+    private DaoHuesped daoHuesped = new DaoHuesped();
+    private Huesped huesped = new Huesped(0, null, null, 0);
+    private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
+    private DaoTarjeta daoTarjeta = new DaoTarjeta();
+    private Tarjeta tarjeta = daoTarjeta.buscarTarjeta(235);
+    private Pago pago = new Pago();
+    private double total;
 
     public void initialize() {
           // Listener para actualizar el cálculo cuando cambie fechaLlegada
