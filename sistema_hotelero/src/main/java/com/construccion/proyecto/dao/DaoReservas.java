@@ -1,11 +1,13 @@
 package com.construccion.proyecto.dao;
-
-
 import com.construccion.proyecto.model.Reservacion;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DaoReservas {
     private Connection con = null;
@@ -60,9 +62,29 @@ public class DaoReservas {
         }
     }
 
-    public void modificarHuesped() throws SQLException {
+    public void modificarReservas(Reservacion reservacion) throws SQLException {
         con = getCon();
-
+        String sql = "UPDATE reservaciones SET idHuesped = ?, idHabitacion = ?, fechaLlegada = ?, fechaSalida = ? WHERE idReservacion = ?";
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setInt(1, reservacion.getIdHuesped());
+            statement.setInt(2, reservacion.getIdHabitacion());
+    
+            // Convertir LocalDate a java.sql.Date para la base de datos
+            statement.setDate(3, java.sql.Date.valueOf(reservacion.getFechaLlegada()));
+            statement.setDate(4, java.sql.Date.valueOf(reservacion.getFechaSalida()));
+    
+            statement.setInt(5, reservacion.getIdReservacion());
+    
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Reservación actualizada exitosamente.");
+            } else {
+                System.out.println("No se encontró ninguna reservación con el ID especificado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al modificar la reservación: " + e.getMessage());
+        }
     }
         
     public List<Reservacion> obtenerReservaciones() throws SQLException {

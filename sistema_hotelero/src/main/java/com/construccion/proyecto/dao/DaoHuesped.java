@@ -1,8 +1,13 @@
 package com.construccion.proyecto.dao;
-import java.sql.*;
-import java.util.ArrayList; 
-import com.construccion.proyecto.model.Huesped;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.construccion.proyecto.model.Huesped;
 public class DaoHuesped {
     private Connection con = null;
     private String host = "jdbc:mysql://localhost:3306/hotel";
@@ -38,6 +43,9 @@ public class DaoHuesped {
         }
     }
 
+    
+    
+
     public void eliminarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
         String sql = "DELETE FROM huesped WHERE idHuesped=?";
@@ -51,10 +59,27 @@ public class DaoHuesped {
         }
     }
 
-    public void modificarHuesped() throws SQLException {
+    public void modificarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
-
+        String sql = "UPDATE huesped SET nombreHuesped = ?, emailHuesped = ?, idTarjeta = ? WHERE idHuesped = ?";
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, huesped.getNombre());
+            statement.setString(2, huesped.getEmail());
+            statement.setInt(3, huesped.getIdTarjeta());
+            statement.setInt(4, huesped.getIdHuesped());
+    
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Huésped actualizado exitosamente.");
+            } else {
+                System.out.println("No se encontró ningún huésped con el ID especificado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al modificar el huésped: " + e.getMessage());
+        }
     }
+    
 
     public Huesped buscarHuesped(int idHuesped) throws SQLException {
         con = getCon();
