@@ -7,8 +7,8 @@ public class Empleado {
     protected String contrasenia;
     protected int rol;
 
-    public Empleado( int clave, String nombre, String usuario, String contrasenia, int rol) {
-        this.claveEmp = clave;
+    public Empleado( int claveEmp, String nombre, String usuario, String contrasenia, int rol) {
+        this.claveEmp = claveEmp;
         this.nombre = nombre;
         this.usuario = usuario;
         this.contrasenia = contrasenia;

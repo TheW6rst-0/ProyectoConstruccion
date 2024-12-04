@@ -1,8 +1,13 @@
 package com.construccion.proyecto.dao;
 import com.construccion.proyecto.model.Empleado;
-
-import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class DaoEmpleado {
     private Connection con = null;
@@ -53,9 +58,25 @@ public class DaoEmpleado {
         }
     }
 
-    public void modificarEmpleado() throws SQLException {
+    public void modificarEmpleado(Empleado emp) throws SQLException {
         con = getCon();
-
+        String sql = "UPDATE empleado SET nombreEmp = ?, usuario = ?, contrasenia = ? WHERE claveEmp = ?";
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, emp.getNombre());
+            statement.setString(2, emp.getUsuario());
+            statement.setString(3, emp.getContrasenia());
+            statement.setInt(4, emp.getClaveEmp());
+    
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Empleado actualizado exitosamente.");
+            } else {
+                System.out.println("No se encontró ningún empleado con la clave especificada.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al modificar el empleado: " + e.getMessage());
+        }
     }
 
     public void buscarEmpleado(int clave) throws SQLException {
@@ -85,6 +106,26 @@ public class DaoEmpleado {
             System.err.println("Error al buscar el empleado: " + e.getMessage());
         }
     }
+    public List<Empleado> obtenerEmpleados() throws SQLException {
+        con = getCon();
+        List<Empleado> empleados = new ArrayList<>();
+        String sqlConsulta = "SELECT * FROM empleado";
+        try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int claveEmp = resultSet.getInt("claveEmp");
+                String nombre = resultSet.getString("nombreEmp");
+                String usuario = resultSet.getString("usuario");
+                String contrasenia = resultSet.getString("contrasenia");
+                int rol = resultSet.getInt("rol");
+                empleados.add(new Empleado(claveEmp, nombre, usuario, contrasenia, rol));   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al obtener los Huespedes: " + e.getMessage());
+        }
+        return empleados;
+    }   
 
     public Empleado validarCredenciales(String usuario, String contrasenia) {
         con = getCon();

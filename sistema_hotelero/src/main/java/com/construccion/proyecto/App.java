@@ -27,7 +27,6 @@ public class App extends Application
         // Inyectar el SceneManager al controlador
         LoginController loginController = loader.getController();
         loginController.setSceneManager(sceneManager);
-
         primaryStage.setScene(mainScene);
         primaryStage.setTitle("The Continental");
         primaryStage.show();

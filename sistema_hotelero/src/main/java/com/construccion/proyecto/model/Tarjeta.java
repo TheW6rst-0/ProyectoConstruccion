@@ -65,6 +65,23 @@ public class Tarjeta {
         this.saldo = saldo;
     }
 
-    public void depositar(){}
-    public void retirar(){}
+    public void depositar(double monto) {
+        if (monto > 0) {
+            this.saldo += monto;
+            System.out.println("Depósito realizado exitosamente. Nuevo saldo: " + saldo);
+        } else {
+            System.out.println("El monto a depositar debe ser positivo.");
+        }
+    }
+
+    public void retirar(double monto) {
+        if (monto > 0 && monto <= this.saldo) {
+            this.saldo -= monto;
+            System.out.println("Retiro realizado exitosamente. Nuevo saldo: " + saldo);
+        } else if (monto > this.saldo) {
+            System.out.println("Saldo insuficiente para realizar el retiro.");
+        } else {
+            System.out.println("El monto a retirar debe ser positivo.");
+        }
+    }
 }

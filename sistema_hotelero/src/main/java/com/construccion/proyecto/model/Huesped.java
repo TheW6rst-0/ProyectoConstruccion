@@ -2,14 +2,15 @@ package com.construccion.proyecto.model;
 
 public class Huesped {
     private String nombre;
-    private int idhuesped;
+    private int idHuesped;
     private String email;
-    private int idtarjeta;
+    private int idTarjeta;
+
     public Huesped( int id,String nombre, String email, int idtarjeta) {
-        this.idhuesped = id;
+        this.idHuesped = id;
         this.nombre = nombre;
         this.email = email;
-        this.idtarjeta = idtarjeta;
+        this.idTarjeta = idtarjeta;
     }
 
     public String getNombre() {
@@ -20,12 +21,12 @@ public class Huesped {
         this.nombre = nombre;
     }
 
-    public int getIdhuesped() {
-        return idhuesped;
+    public int getIdHuesped() {
+        return idHuesped;
     }
 
-    public void setIdhuesped(int idhuesped) {
-        this.idhuesped = idhuesped;
+    public void setIdHuesped(int idhuesped) {
+        this.idHuesped = idhuesped;
     }
 
     public String getEmail() {
@@ -36,11 +37,11 @@ public class Huesped {
         this.email = email;
     }
 
-    public int getIdtarjeta() {
-        return idtarjeta;
+    public int getIdTarjeta() {
+        return idTarjeta;
     }
 
-    public void setIdtarjeta(int idtarjeta) {
-        this.idtarjeta = idtarjeta;
+    public void setIdTarjeta(int idtarjeta) {
+        this.idTarjeta = idtarjeta;
     }
 }

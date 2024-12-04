@@ -1,5 +1,9 @@
 package com.construccion.proyecto.dao;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.construccion.proyecto.model.Habitacion;
 
@@ -15,7 +19,7 @@ public class DaoHabitaciones {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(host, user, pass);
-            System.out.println("Conexion exitosa");
+            
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -56,13 +60,32 @@ public class DaoHabitaciones {
         }
     }
 
-    public void modificarHuesped() throws SQLException {
+    public void modificarHabitacion(Habitacion habitacion) throws SQLException {
         con = getCon();
-
+        String sql = "UPDATE habitacion SET tipoHabitacion = ?, camas = ?, precio = ?, disponibilidad = ? WHERE idHabitacion = ?";
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, habitacion.getTipoHabitacion());
+            statement.setString(2, habitacion.getCamas());
+            statement.setDouble(3, habitacion.getPrecio());
+            statement.setBoolean(4, habitacion.isDisponibilidad());
+            statement.setInt(5, habitacion.getIdHabitacion());
+    
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Habitación actualizada exitosamente.");
+            } else {
+                System.out.println("No se encontró ninguna habitación con el ID especificado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error al modificar la habitación: " + e.getMessage());
+        }
     }
+    
 
-    public void buscarHabitacion(int idHabitacion) throws SQLException {
+    public Habitacion buscarHabitacion(int idHabitacion) throws SQLException {
         con = getCon();
+        Habitacion habitacion = null;
         String sqlConsulta = "SELECT * FROM habitacion WHERE idHabitacion = ?";
         try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
             statement.setInt(1, idHabitacion);
@@ -75,13 +98,7 @@ public class DaoHabitaciones {
                 String camas = resultSet.getString("camas");
                 double precio = resultSet.getDouble("precio");
                 boolean disponibilidad = resultSet.getBoolean("disponibilidad");
-
-                System.out.println("Información de la Habitacion:");
-                System.out.println("ID Huesped: " + id);
-                System.out.println("Nombre: " + tipoHabitacion);
-                System.out.println("Camas: " + camas);
-                System.out.println("ID Tarjeta: " + precio);
-                System.out.println("Disponibilidad: " + disponibilidad);
+                habitacion = new Habitacion(id, tipoHabitacion, camas, precio, disponibilidad);
             } else {
                 System.out.println("No se encontró ningún Huesped con la clave: " + idHabitacion);
             }
@@ -89,9 +106,11 @@ public class DaoHabitaciones {
             e.printStackTrace();
             System.err.println("Error al buscar el Huesped: " + e.getMessage());
         }
+        return habitacion;
     }
 
     public Habitacion buscarHabitacionPorTipo(String tipo) throws SQLException {
+        con = getCon();
         String sql = "SELECT * FROM habitacion WHERE tipoHabitacion = ? LIMIT 1";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setString(1, tipo);
