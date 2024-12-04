@@ -12,6 +12,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.construccion.proyecto.model.Reservacion;
+/**
+ * Clase DAO encargada de realizar las operaciones sobre la base de datos relacionadas con las reservaciones.
+ * Proporciona métodos para agregar, eliminar, modificar, buscar y obtener reservaciones,
+ * así como obtener las fechas ocupadas por habitación.
+ */
 
 public class DaoReservas {
     private Connection con = null;
@@ -20,6 +25,12 @@ public class DaoReservas {
     private final String pass = "";
 
 
+
+    /**
+     * Establece una conexión con la base de datos.
+     *
+     * @return La conexión a la base de datos.
+     */
 
     public Connection getCon() {
         try {
@@ -31,6 +42,13 @@ public class DaoReservas {
         }
         return con;
     }
+/**
+     * Agrega una nueva reservación a la base de datos.
+     *
+     * @param reservacion La reservación que se va a agregar.
+     * @return true si la reservación fue agregada exitosamente, false en caso contrario.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public boolean agregarReservacion(Reservacion reservacion) throws SQLException {
         con = getCon();
@@ -52,6 +70,13 @@ public class DaoReservas {
         }
     }
 
+/**
+     * Elimina una reservación de la base de datos.
+     *
+     * @param reservacion La reservación que se va a eliminar.
+     * @return true si la reservación fue eliminada exitosamente, false en caso contrario.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public boolean eliminarHuesped(Reservacion reservacion) throws SQLException {
         con = getCon();
@@ -64,6 +89,13 @@ public class DaoReservas {
                 return false;
         }
     }
+    /**
+     * Modifica una reservación existente en la base de datos.
+     *
+     * @param reservacion La reservación con los nuevos datos.
+     * @return true si la reservación fue modificada exitosamente, false en caso contrario.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public boolean modificarReservas(Reservacion reservacion) throws SQLException {
         con = getCon();
@@ -90,7 +122,13 @@ public class DaoReservas {
             return false;
         }
     }
-        
+            /**
+     * Obtiene todas las reservaciones registradas en la base de datos.
+     *
+     * @return Una lista con todas las reservaciones.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
+
     public List<Reservacion> obtenerReservaciones() throws SQLException {
         con = getCon();
         List<Reservacion> reservaciones = new ArrayList<>();
@@ -113,6 +151,13 @@ public class DaoReservas {
     }   
 
     
+/**
+     * Busca una reservación en la base de datos por su ID.
+     *
+     * @param idReservacion El ID de la reservación que se desea buscar.
+     * @return La reservación con el ID especificado o null si no se encuentra.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public Reservacion buscarReservacion(int idReservacion) throws SQLException {
         con = getCon();
@@ -139,6 +184,12 @@ public class DaoReservas {
             return null;
         }
     }
+    /**
+     * Obtiene las fechas ocupadas por habitación desde la base de datos.
+     *
+     * @return Un mapa con el ID de la habitación y una lista de fechas ocupadas.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public Map<Integer, List<LocalDate>> obtenerFechasOcupadasPorHabitacion() throws SQLException {
     String sql = "SELECT idHabitacion, fechaLlegada, fechaSalida FROM reservaciones";
@@ -161,6 +212,13 @@ public class DaoReservas {
     }
     return fechasOcupadas;
 }
+/**
+     * Elimina una reservación por su ID.
+     *
+     * @param idReservacion El ID de la reservación que se desea eliminar.
+     * @return true si la reservación fue eliminada exitosamente, false en caso contrario.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
 public boolean eliminarReservacion(int idReservacion) throws SQLException {
     con = getCon();

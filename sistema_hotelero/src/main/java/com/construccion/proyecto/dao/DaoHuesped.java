@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.construccion.proyecto.model.Huesped;
+/**
+ * Clase encargada de realizar las operaciones CRUD sobre la tabla "huesped" en la base de datos.
+ */
+
 public class DaoHuesped {
     private Connection con = null;
     private final String host = "jdbc:mysql://localhost:3306/hotel";
@@ -15,6 +19,11 @@ public class DaoHuesped {
     private final String pass = "";
 
 
+    /**
+     * Establece la conexión con la base de datos.
+     * 
+     * @return la conexión a la base de datos.
+     */
 
     public Connection getCon() {
         try {
@@ -26,6 +35,13 @@ public class DaoHuesped {
         }
         return con;
     }
+    /**
+     * Agrega un nuevo huésped a la base de datos.
+     * 
+     * @param huesped objeto de tipo Huesped que contiene los datos a insertar.
+     * @return true si la operación fue exitosa, false en caso de error.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public boolean agregarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
@@ -44,6 +60,13 @@ public class DaoHuesped {
 
     
     
+    /**
+     * Elimina un huésped de la base de datos.
+     * 
+     * @param huesped objeto de tipo Huesped que contiene el ID del huésped a eliminar.
+     * @return true si la operación fue exitosa, false en caso de error.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public boolean eliminarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
@@ -57,7 +80,14 @@ public class DaoHuesped {
             return false;
         }
     }
-    
+        /**
+     * Modifica los datos de un huésped en la base de datos.
+     * 
+     * @param huesped objeto de tipo Huesped que contiene los datos a modificar.
+     * @return true si la operación fue exitosa, false en caso de que no se encuentre el huésped.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
+
     public boolean modificarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
         String sql = "UPDATE huesped SET nombreHuesped = ?, emailHuesped = ?, idTarjeta = ? WHERE idHuesped = ?";
@@ -81,6 +111,13 @@ public class DaoHuesped {
         }
     }
     
+    /**
+     * Busca un huésped por su ID.
+     * 
+     * @param idHuesped ID del huésped a buscar.
+     * @return el objeto Huesped encontrado o null si no se encuentra.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public Huesped buscarHuesped(int idHuesped) throws SQLException {
         con = getCon();
@@ -104,6 +141,12 @@ public class DaoHuesped {
         }
         return huesped;
     }
+    /**
+     * Obtiene todos los huéspedes de la base de datos.
+     * 
+     * @return una lista de objetos Huesped con todos los huéspedes.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public List<Huesped> obtenerHuespedes() throws SQLException {
         con = getCon();
@@ -126,6 +169,13 @@ public class DaoHuesped {
         }
         return huespedes;
     }   
+    /**
+     * Busca un huésped por su nombre.
+     * 
+     * @param nombreHuesped nombre del huésped a buscar.
+     * @return el objeto Huesped encontrado o null si no se encuentra.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public Huesped buscarHuesped(String nombreHuesped) throws SQLException {
         con = getCon();

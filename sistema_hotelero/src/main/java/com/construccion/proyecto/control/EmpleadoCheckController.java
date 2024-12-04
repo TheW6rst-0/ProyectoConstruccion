@@ -20,6 +20,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+/**
+ * Controlador para la gestión de check-ins en la aplicación de administración de reservas.
+ * Permite la visualización, filtrado y cancelación de reservas, así como la navegación por otras vistas de la aplicación.
+ */
 
 public class EmpleadoCheckController implements SceneAware{
 
@@ -62,6 +66,9 @@ private Accordion accordion;
 
 private DaoReservas daoReservas = new DaoReservas();
 private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
+    /**
+     * Método de inicialización. Configura el ChoiceBox con los tipos de habitación y carga las reservas ocupadas en un Accordion.
+     */
 
 @FXML
 public void initialize() {
@@ -97,31 +104,66 @@ public void initialize() {
 }
 
 
+    /**
+     * Establece el manejador de escena para la navegación entre vistas.
+     *
+     * @param sceneManager El objeto encargado de gestionar las escenas.
+     */
 
     @Override
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
+        /**
+     * Maneja el evento de clic en el botón de "Cerrar sesión".
+     * Redirige al usuario a la pantalla de inicio de sesión.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnCerrarClicked(ActionEvent event) {
         sceneManager.switchScene("/Login.fxml");
     }
+    /**
+     * Maneja el evento de clic en el botón de "Habitaciones".
+     * Redirige al usuario a la vista de administración de habitaciones.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnHabitacionesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/empleado/EmpleadoDashboard.fxml");
     }
+    /**
+     * Maneja el evento de clic en el botón de "Huéspedes".
+     * Redirige al usuario a la vista de administración de huéspedes.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnHuespedesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/empleado/EmpleadoHuespedes.fxml");
     }
+        /**
+     * Maneja el evento de clic en el botón de "Reservar".
+     * Redirige al usuario a la vista de reservas.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnReservarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/empleado/EmpleadoReservar.fxml");
     }
+    /**
+     * Maneja el evento de clic en el botón de "Cancelar reservación".
+     * Cancela una reservación si el ID es válido y lo elimina de la base de datos.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnCancelarClicked(ActionEvent event) {
@@ -176,6 +218,12 @@ public void initialize() {
     }
 }
 
+    /**
+     * Maneja el evento de clic en el botón de "Filtrar reservaciones".
+     * Filtra las habitaciones según el tipo o número de habitación, y actualiza la vista.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
 void btnFiltrarClicked(ActionEvent event) {

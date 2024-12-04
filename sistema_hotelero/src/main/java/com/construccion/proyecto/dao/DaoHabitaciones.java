@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.construccion.proyecto.model.Habitacion;
+/**
+ * Clase encargada de realizar las operaciones CRUD sobre la tabla "habitacion" en la base de datos.
+ */
 
 public class DaoHabitaciones {
     private Connection con = null;
@@ -17,6 +20,11 @@ public class DaoHabitaciones {
     private final String pass = "";
 
 
+    /**
+     * Establece la conexión con la base de datos.
+     * 
+     * @return la conexión a la base de datos.
+     */
 
     public Connection getCon() {
         try {
@@ -28,6 +36,12 @@ public class DaoHabitaciones {
         }
         return con;
     }
+    /**
+     * Agrega una nueva habitación a la base de datos.
+     * 
+     * @param habitacion objeto de tipo Habitacion que contiene los datos a insertar.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public void agregarHabitaciones(Habitacion habitacion) throws SQLException {
         con = getCon();
@@ -49,6 +63,12 @@ public class DaoHabitaciones {
         }
     }
 
+    /**
+     * Elimina una habitación de la base de datos.
+     * 
+     * @param habitacion objeto de tipo Habitacion que contiene el ID de la habitación a eliminar.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public void eliminarHabitacion(Habitacion habitacion) throws SQLException {
         con = getCon();
@@ -62,6 +82,12 @@ public class DaoHabitaciones {
             System.err.println("Error al eliminar el Habitacion de la base de datos: " + e.getMessage());
         }
     }
+    /**
+     * Modifica los datos de una habitación en la base de datos.
+     * 
+     * @param habitacion objeto de tipo Habitacion que contiene los datos a modificar.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public void modificarHabitacion(Habitacion habitacion) throws SQLException {
         con = getCon();
@@ -85,6 +111,13 @@ public class DaoHabitaciones {
         }
     }
     
+    /**
+     * Busca una habitación por su ID.
+     * 
+     * @param idHabitacion ID de la habitación a buscar.
+     * @return el objeto Habitacion encontrado o null si no se encuentra.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public Habitacion buscarHabitacion(int idHabitacion) throws SQLException {
         con = getCon();
@@ -111,6 +144,13 @@ public class DaoHabitaciones {
         }
         return habitacion;
     }
+    /**
+     * Busca una habitación por tipo.
+     * 
+     * @param tipo tipo de habitación a buscar.
+     * @return el objeto Habitacion encontrado o null si no se encuentra.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public Habitacion buscarHabitacionPorTipo(String tipo) throws SQLException {
         con = getCon();
@@ -131,6 +171,16 @@ public class DaoHabitaciones {
         }
         return null;
     }
+    /**
+     * Busca habitaciones disponibles por tipo y fechas.
+     * 
+     * @param tipo tipo de habitación a buscar.
+     * @param fechaInicio fecha de inicio de la búsqueda.
+     * @param fechaFin fecha de fin de la búsqueda.
+     * @return una lista de habitaciones disponibles.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
+
     public List<Habitacion> buscarHabitacionesDisponiblesPorTipoYFechas(String tipo, LocalDate fechaInicio, LocalDate fechaFin) throws SQLException {
         con = getCon(); // Obtener la conexión
         List<Habitacion> habitacionesDisponibles = new ArrayList<>();
@@ -165,6 +215,13 @@ public class DaoHabitaciones {
         }
         return habitacionesDisponibles;
     }
+    /**
+     * Obtiene una lista de IDs de habitaciones por tipo.
+     * 
+     * @param tipo tipo de habitación a buscar.
+     * @return una lista de IDs de habitaciones.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
 
     public List<Integer> getHabitacionesPorTipo(String tipo) throws SQLException {
         List<Integer> ids = new ArrayList<>();
@@ -181,7 +238,14 @@ public class DaoHabitaciones {
         }
         return ids;
     }
-    
+    /**
+     * Obtiene la disponibilidad de una habitación por su ID.
+     * 
+     * @param idHabitacion ID de la habitación a consultar.
+     * @return true si está disponible, false si no lo está.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
+
     public boolean getDisponibilidadPorId(int idHabitacion) throws SQLException {
         String sql = "SELECT disponibilidad FROM habitacion WHERE idHabitacion = ?";
         con = getCon();
@@ -196,7 +260,14 @@ public class DaoHabitaciones {
         }
         throw new SQLException("No se encontró la habitación con ID: " + idHabitacion);
     }
-    
+        /**
+     * Actualiza la disponibilidad de una habitación por su ID.
+     * 
+     * @param idHabitacion ID de la habitación a actualizar.
+     * @param nuevaDisponibilidad nuevo estado de disponibilidad.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
+
     public void actualizarDisponibilidad(int idHabitacion, boolean nuevaDisponibilidad) throws SQLException {
         String sql = "UPDATE habitacion SET disponibilidad = ? WHERE idHabitacion = ?";
         con = getCon();
@@ -215,7 +286,13 @@ public class DaoHabitaciones {
             throw new SQLException("Error al actualizar la disponibilidad: " + e.getMessage());
         }
     }
-    
+        /**
+     * Obtiene todos los IDs de las habitaciones.
+     * 
+     * @return una lista con los IDs de todas las habitaciones.
+     * @throws SQLException si ocurre un error al ejecutar la consulta.
+     */
+
     public List<Integer> getAllHabitaciones() throws SQLException {
         List<Integer> ids = new ArrayList<>();
         String sql = "SELECT idHabitacion FROM habitacion";

@@ -9,15 +9,27 @@ import java.util.List;
 
 import com.construccion.proyecto.model.Empleado;
 
+/**
+ * Clase que gestiona las operaciones relacionadas con la entidad Empleado en la base de datos.
+ * Incluye métodos para agregar, eliminar, modificar, buscar y validar empleados.
+ */
 
 public class DaoEmpleado {
     private Connection con = null;
     private final String host = "jdbc:mysql://localhost:3306/hotel";
     private final String user = "root";
     private final String pass = "";
+/**
+     * Constructor de la clase DaoEmpleado.
+     */
 
     public DaoEmpleado() {
     }
+/**
+     * Establece una conexión con la base de datos.
+     * 
+     * @return La conexión a la base de datos.
+     */
 
     public Connection getCon() {
         try {
@@ -29,6 +41,13 @@ public class DaoEmpleado {
         }
         return con;
     }
+/**
+     * Agrega un nuevo empleado a la base de datos.
+     * 
+     * @param emp El objeto Empleado que se desea agregar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public boolean agregarEmpleado(Empleado emp) throws SQLException {
         con = getCon();
@@ -47,6 +66,13 @@ public class DaoEmpleado {
             return false;
         }
     }
+/**
+     * Elimina un empleado de la base de datos por su clave.
+     * 
+     * @param emp El objeto Empleado que se desea eliminar.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public boolean eliminarEmpleado(Empleado emp) throws SQLException {
         con = getCon();
@@ -60,6 +86,13 @@ public class DaoEmpleado {
             return false;
         }
     }
+/**
+     * Modifica los datos de un empleado en la base de datos.
+     * 
+     * @param emp El objeto Empleado con los nuevos datos.
+     * @return true si la operación fue exitosa, false en caso contrario.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public boolean modificarEmpleado(Empleado emp) throws SQLException {
         con = getCon();
@@ -84,6 +117,13 @@ public class DaoEmpleado {
             return false;
         }
     }
+/**
+     * Busca un empleado en la base de datos por su clave.
+     * 
+     * @param clave La clave del empleado que se busca.
+     * @return El objeto Empleado encontrado o null si no se encuentra.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public Empleado buscarEmpleado(int clave) throws SQLException {
         con = getCon();
@@ -109,6 +149,12 @@ public class DaoEmpleado {
             return null;
         }
     }
+/**
+     * Obtiene una lista de todos los empleados registrados en la base de datos.
+     * 
+     * @return Una lista de objetos Empleado.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public List<Empleado> obtenerEmpleados() throws SQLException {
         con = getCon();
@@ -130,6 +176,13 @@ public class DaoEmpleado {
         }
         return empleados;
     }   
+    /**
+     * Valida las credenciales de un usuario para el inicio de sesión.
+     * 
+     * @param usuario El nombre de usuario.
+     * @param contrasenia La contraseña del usuario.
+     * @return Un objeto Empleado si las credenciales son válidas, o null si no lo son.
+     */
 
     public Empleado validarCredenciales(String usuario, String contrasenia) {
         con = getCon();

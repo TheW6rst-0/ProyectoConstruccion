@@ -1,11 +1,31 @@
 package com.construccion.proyecto.model;
+/**
+ * Representa a un empleado dentro del sistema, con atributos como clave, nombre, 
+ * usuario, contraseña y rol. Esta clase también permite gestionar reservas a 
+ * través de los métodos de registro y cancelación, aunque estos métodos actualmente 
+ * no implementan ninguna funcionalidad.
+ */
 
 public class Empleado {
-    protected int claveEmp;
-    protected String nombre;
-    protected String usuario;
-    protected String contrasenia;
-    protected int rol;
+        /** La clave única que identifica al empleado */
+    private int claveEmp;
+        /** El nombre del empleado */
+    private String nombre;
+        /** El nombre de usuario del empleado */
+    private String usuario;
+        /** La contraseña del empleado */
+    private String contrasenia;
+    /** El rol del empleado (por ejemplo, administrador, recepcionista, etc.) */
+    private int rol;
+    /**
+     * Constructor de la clase Empleado.
+     *
+     * @param claveEmp La clave única del empleado.
+     * @param nombre El nombre del empleado.
+     * @param usuario El nombre de usuario del empleado.
+     * @param contrasenia La contraseña del empleado.
+     * @param rol El rol del empleado.
+     */
 
     public Empleado( int claveEmp, String nombre, String usuario, String contrasenia, int rol) {
         this.claveEmp = claveEmp;
@@ -13,13 +33,6 @@ public class Empleado {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
         this.rol = rol;
-    }
-
-    public void registrarReserva(){
-    }
-
-    public void cancelarReserva(){
-
     }
 
     public String getContrasenia() {

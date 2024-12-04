@@ -23,6 +23,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+/**
+ * Controlador para la ventana de reservaciones en el sistema del empleado.
+ */
 
 public class EmpleadoReservarController implements SceneAware {
   
@@ -40,27 +43,52 @@ public class EmpleadoReservarController implements SceneAware {
     private TextField txtCamas, txtCorreo, txtDisponibilidad, txtNoches, txtNombre, txtMonto, txtPrecio, txtTotal;
 
     private SceneManager sceneManager;
+    /**
+     * Establece el SceneManager para la administración de las pantallas.
+     * 
+     * @param sceneManager El SceneManager que maneja la navegación entre vistas.
+     */
 
     @Override
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
+    /**
+     * Maneja el evento de clic en el botón de cerrar sesión.
+     * 
+     * @param event El evento de clic en el botón.
+     */
 
     @FXML
     void btnCerrarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/Login.fxml");
     }
+    /**
+     * Maneja el evento de clic en el botón para ir a la vista de check-in.
+     * 
+     * @param event El evento de clic en el botón.
+     */
 
     @FXML
     void btnCheckClicked(ActionEvent event) {
         sceneManager.switchScene("/view/empleado/EmpleadoCheck.fxml");
     }
+    /**
+     * Maneja el evento de clic en el botón para ir a la vista de huéspedes.
+     * 
+     * @param event El evento de clic en el botón.
+     */
 
 
     @FXML
     void btnHuespedesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/empleado/EmpleadoHuespedes.fxml");
     }
+    /**
+     * Maneja el evento de clic en el botón para ir a la vista de habitaciones.
+     * 
+     * @param event El evento de clic en el botón.
+     */
 
     @FXML
     void btnHabitacionesClicked(ActionEvent event) {
@@ -75,6 +103,11 @@ public class EmpleadoReservarController implements SceneAware {
     private Tarjeta tarjeta = daoTarjeta.buscarTarjeta(235);
     private Pago pago = new Pago();
     private double total;
+        /**
+     * Método de inicialización, se ejecuta cuando la vista es cargada.
+     * Establece los listeners y configuraciones iniciales de los controles.
+     */
+
     public void initialize() {
           // Listener para actualizar el cálculo cuando cambie fechaLlegada
     fechaLlegada.valueProperty().addListener((observable, oldValue, newValue) -> calcularPago());
@@ -116,25 +149,44 @@ public class EmpleadoReservarController implements SceneAware {
             }
         });
     }
+    /**
+     * Maneja la selección de pago mediante tarjeta, deshabilitando el campo de monto.
+     */
 
     private void manejarSeleccionTarjeta() {
         txtMonto.clear();
         txtMonto.setDisable(true);
     }
+        /**
+     * Maneja la selección de pago en efectivo, habilitando el campo de monto.
+     */
 
     private void manejarSeleccionEfectivo() {
         txtMonto.setDisable(false);
     }
+    /**
+     * Actualiza los detalles de la habitación seleccionada en la interfaz.
+     * 
+     * @param habitacion La habitación seleccionada.
+     */
 
     private void actualizarInfoHabitacion(Habitacion habitacion) {
         txtCamas.setText(habitacion.getCamas());
         txtPrecio.setText(String.valueOf(habitacion.getPrecio()));
         txtDisponibilidad.setText(habitacion.isDisponibilidad() ? "Disponible" : "No disponible");
     }
+        /**
+     * Muestra un mensaje en la consola (se puede mejorar para mostrar en la interfaz).
+     * 
+     * @param mensaje El mensaje que se desea mostrar.
+     */
 
     private void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
     }
+        /**
+     * Calcula el total a pagar basado en las fechas seleccionadas y el precio de la habitación.
+     */
 
     @FXML
     private void calcularPago() {
@@ -168,6 +220,11 @@ public class EmpleadoReservarController implements SceneAware {
         txtNoches.setText(String.valueOf(noches));
         txtTotal.setText(String.format("%.2f", total));
     }
+    /**
+     * Maneja el evento de clic en el botón de proceder para procesar la reservación.
+     * 
+     * @param event El evento de clic en el botón.
+     */
 
     @FXML
     void btnProcederClicked(ActionEvent event) {

@@ -1,5 +1,11 @@
 package com.construccion.proyecto.model;
 import java.util.Date;
+/**
+ * Clase que representa una tarjeta de pago, con atributos como el nombre del titular,
+ * el número de tarjeta, el NIP, la fecha de vencimiento y el saldo disponible.
+ * Incluye métodos para depositar y retirar dinero de la tarjeta.
+ */
+
 public class Tarjeta {
     private int idTarjeta;
     private String nombreTitular;
@@ -7,6 +13,16 @@ public class Tarjeta {
     private String nip;
     private Date vencimiento;
     private double saldo;
+    /**
+     * Constructor que inicializa los atributos de la tarjeta.
+     *
+     * @param idTarjeta El identificador único de la tarjeta.
+     * @param nombreTitular El nombre del titular de la tarjeta.
+     * @param numeroTarjeta El número de la tarjeta.
+     * @param nip El NIP de la tarjeta.
+     * @param vencimiento La fecha de vencimiento de la tarjeta.
+     * @param saldo El saldo disponible en la tarjeta.
+     */
 
     public Tarjeta(int idTarjeta, String nombreTitular, String numeroTarjeta, String nip, Date vencimiento, double saldo) {
         this.idTarjeta = idTarjeta;
@@ -64,6 +80,12 @@ public class Tarjeta {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+    /**
+     * Realiza un depósito a la tarjeta, sumando el monto al saldo actual. Si el monto es positivo,
+     * se realiza el depósito; si no, se muestra un mensaje de error.
+     *
+     * @param monto El monto a depositar en la tarjeta.
+     */
 
     public void depositar(double monto) {
         if (monto > 0) {
@@ -73,6 +95,12 @@ public class Tarjeta {
             System.out.println("El monto a depositar debe ser positivo.");
         }
     }
+    /**
+     * Realiza un retiro de dinero de la tarjeta. Si el monto es menor o igual al saldo disponible,
+     * se realiza el retiro; si no, se muestra un mensaje de error indicando saldo insuficiente.
+     *
+     * @param monto El monto a retirar de la tarjeta.
+     */
 
     public void retirar(double monto) {
         if (monto > 0 && monto <= this.saldo) {

@@ -20,6 +20,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+/**
+ * Controlador de la vista de administración de reservas y habitaciones.
+ */
 
 public class AdminCheckController implements SceneAware{
 
@@ -72,6 +75,9 @@ private Accordion accordion;
 
 private DaoReservas daoReservas = new DaoReservas();
 private DaoHabitaciones daoHabitaciones = new DaoHabitaciones();
+    /**
+     * Inicializa los componentes de la interfaz y configura los valores iniciales.
+     */
 
 @FXML
 public void initialize() {
@@ -105,6 +111,12 @@ public void initialize() {
         e.printStackTrace();
     }
 }
+    /**
+     * Maneja el evento del botón para cancelar una reservación.
+     *
+     * @param event el evento de clic en el botón.
+     */
+
 @FXML
     void btnCancelarClicked(ActionEvent event) {
     String idReservacionStr = txtReserva.getText(); // Obtener el texto del campo txtReservacion
@@ -157,6 +169,11 @@ public void initialize() {
         alert.showAndWait();
     }
 }
+    /**
+     * Maneja el evento del botón para filtrar habitaciones.
+     *
+     * @param event el evento de clic en el botón.
+     */
 
 
     @FXML
@@ -205,6 +222,11 @@ void btnFiltrarClicked(ActionEvent event) {
     }
 }
 
+    /**
+     * Configura el SceneManager para gestionar las transiciones de escena.
+     *
+     * @param sceneManager el manejador de escenas.
+     */
 
     @Override
     public void setSceneManager(SceneManager sceneManager) {

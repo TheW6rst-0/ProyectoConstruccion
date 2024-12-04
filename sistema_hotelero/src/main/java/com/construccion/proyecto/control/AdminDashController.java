@@ -13,6 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+/**
+ * Controlador de la vista principal del panel de administración.
+ * Administra las habitaciones y las transiciones entre vistas.
+ */
 
 public class AdminDashController implements SceneAware {
 
@@ -72,57 +76,114 @@ public class AdminDashController implements SceneAware {
 
 
     private SceneManager sceneManager;
+    /**
+     * Establece el manejador de escenas para realizar transiciones entre vistas.
+     *
+     * @param sceneManager el manejador de escenas.
+     */
 
     @Override
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
 
+    /**
+     * Cambia la vista a la pantalla de inicio de sesión.
+     *
+     * @param event el evento de clic en el botón.
+     */
 
     @FXML
     void btnCerrarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/Login.fxml");
     }
+    /**
+     * Cambia la vista al panel de verificación de habitaciones.
+     *
+     * @param event el evento de clic en el botón.
+     */
 
     @FXML
     void btnCheckClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminCheck.fxml");
     }
+    /**
+     * Cambia la vista al panel de administración de empleados.
+     *
+     * @param event el evento de clic en el botón.
+     */
 
     @FXML
     void btnEmpleadosClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminEmpleados.fxml");
     }
+    /**
+     * Cambia la vista al panel de administración de huéspedes.
+     *
+     * @param event el evento de clic en el botón.
+     */
 
     @FXML
     void btnHuespedesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminHuespedes.fxml");
     }   
+    /**
+     * Cambia la vista al panel de reservaciones.
+     *
+     * @param event el evento de clic en el botón.
+     */
 
     @FXML
     void btnReservarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminReservar.fxml");
     }
 
+    /**
+     * Cambia la vista al panel de ventas.
+     *
+     * @param event el evento de clic en el botón.
+     */
+
     @FXML
     void btnVentasClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminVentas.fxml");
     }
+    /**
+     * Alterna la disponibilidad de las habitaciones de tipo DBL.
+     *
+     * @param event el evento de clic en el botón.
+     */
 
     @FXML
 void btnToggleDBLClicked(ActionEvent event) {
     cambiarDisponibilidad(choiceDBL, txtDispDBL);
 }
+    /**
+     * Alterna la disponibilidad de las habitaciones de tipo SNG.
+     *
+     * @param event el evento de clic en el botón.
+     */
 
 @FXML
 void btnToggleSNGClicked(ActionEvent event) {
     cambiarDisponibilidad(choiceSNG, txtDispSNG);
 }
+    /**
+     * Alterna la disponibilidad de las habitaciones de tipo ST.
+     *
+     * @param event el evento de clic en el botón.
+     */
 
 @FXML
 void btnToggleSTClicked(ActionEvent event) {
     cambiarDisponibilidad(choiceST, txtDispST);
 }
+/**
+     * Cambia la disponibilidad de una habitación específica.
+     *
+     * @param choiceBox el ChoiceBox que contiene los IDs de las habitaciones.
+     * @param txtField  el campo de texto para mostrar la disponibilidad.
+     */
 
 private void cambiarDisponibilidad(ChoiceBox<Integer> choiceBox, TextField txtField) {
     Integer idHabitacion = choiceBox.getSelectionModel().getSelectedItem();
@@ -149,6 +210,9 @@ private void cambiarDisponibilidad(ChoiceBox<Integer> choiceBox, TextField txtFi
         System.out.println("No se seleccionó ninguna habitación.");
     }
 }
+    /**
+     * Inicializa los datos del controlador, cargando habitaciones y configurando listeners.
+     */
 
     @FXML
 void initialize() {
@@ -169,6 +233,12 @@ void initialize() {
         mostrarDisponibilidad(newValue, txtDispST);
     });
 }
+    /**
+     * Muestra la disponibilidad de una habitación en el campo de texto correspondiente.
+     *
+     * @param idHabitacion el ID de la habitación.
+     * @param txtField     el campo de texto donde se mostrará la disponibilidad.
+     */
 
 private void mostrarDisponibilidad(Integer idHabitacion, TextField txtField) {
     if (idHabitacion != null) {
@@ -183,6 +253,12 @@ private void mostrarDisponibilidad(Integer idHabitacion, TextField txtField) {
         txtField.clear();
     }
 }
+    /**
+     * Carga los IDs de las habitaciones según su tipo en el ChoiceBox correspondiente.
+     *
+     * @param choiceBox el ChoiceBox donde se cargarán los IDs.
+     * @param tipo      el tipo de habitación (SNG, DBL, ST).
+     */
 
     private void cargarHabitaciones(ChoiceBox<Integer> choiceBox, String tipo) {
         try {
@@ -193,6 +269,13 @@ private void mostrarDisponibilidad(Integer idHabitacion, TextField txtField) {
             e.printStackTrace();
         }
     }
+/**
+     * Obtiene los IDs de habitaciones por tipo desde la base de datos.
+     *
+     * @param tipo el tipo de habitación (SNG, DBL, ST).
+     * @return una lista de IDs de habitaciones.
+     * @throws SQLException si ocurre un error en la consulta a la base de datos.
+     */
 
     private List<Integer> obtenerIdsPorTipo(String tipo) throws SQLException {
         return daoHabitaciones.getHabitacionesPorTipo(tipo);

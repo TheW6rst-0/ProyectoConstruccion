@@ -39,38 +39,86 @@ public class AdminReservarController implements SceneAware {
     private Label lblUsername, lblUsername1;
     @FXML
     private TextField txtCamas, txtCorreo, txtDisponibilidad, txtNoches, txtNombre, txtMonto, txtPrecio, txtTotal;
-
+   /**
+ * Controlador para gestionar las reservaciones de habitaciones.
+ * Permite realizar la selección de fechas, tipo de habitación, y el pago de la reserva.
+ * Utiliza DAO para acceder a la base de datos y realizar operaciones relacionadas con las habitaciones,
+ * los huéspedes, las reservas y los pagos.
+ */
     private SceneManager sceneManager;
+ 
+
+    /**
+     * Establece el manejador de la escena.
+     * 
+     * @param sceneManager El administrador de escenas.
+     */
 
     @Override
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
+    /**
+     * Método que maneja el evento de cierre de la sesión.
+     * Cambia la vista a la pantalla de inicio de sesión.
+     * 
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnCerrarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/Login.fxml");
     }
+    /**
+     * Método que maneja el evento de clic en el botón de "Check".
+     * Cambia la vista a la pantalla de administración de verificaciones.
+     * 
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnCheckClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminCheck.fxml");
     }
+    /**
+     * Método que maneja el evento de clic en el botón de "Empleados".
+     * Cambia la vista a la pantalla de administración de empleados.
+     * 
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnEmpleadosClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminEmpleados.fxml");
     }
+    /**
+     * Método que maneja el evento de clic en el botón de "Huespedes".
+     * Cambia la vista a la pantalla de administración de huéspedes.
+     * 
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnHuespedesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminHuespedes.fxml");
     }
+    /**
+     * Método que maneja el evento de clic en el botón de "Ventas".
+     * Cambia la vista a la pantalla de administración de ventas.
+     * 
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnVentasClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminVentas.fxml");
     }
+/**
+     * Método que maneja el evento de clic en el botón de "Habitaciones".
+     * Cambia la vista a la pantalla de administración de habitaciones.
+     * 
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnHabitacionesClicked(ActionEvent event) {
@@ -85,6 +133,11 @@ public class AdminReservarController implements SceneAware {
     private Tarjeta tarjeta = daoTarjeta.buscarTarjeta(235);
     private Pago pago = new Pago();
     private double total;
+    /**
+     * Método de inicialización que configura los listeners y el comportamiento inicial.
+     * Se configura la actualización del cálculo de pago cuando cambian las fechas de llegada o salida,
+     * así como la selección de tipo de habitación y método de pago.
+     */
 
     public void initialize() {
           // Listener para actualizar el cálculo cuando cambie fechaLlegada
@@ -127,25 +180,47 @@ public class AdminReservarController implements SceneAware {
             }
         });
     }
+/**
+     * Método que maneja la selección de pago con tarjeta.
+     * Desactiva el campo de monto cuando se selecciona tarjeta.
+     */
 
     private void manejarSeleccionTarjeta() {
         txtMonto.clear();
         txtMonto.setDisable(true);
     }
+    /**
+     * Método que maneja la selección de pago en efectivo.
+     * Activa el campo de monto cuando se selecciona efectivo.
+     */
 
     private void manejarSeleccionEfectivo() {
         txtMonto.setDisable(false);
     }
+    /**
+     * Actualiza la información de la habitación seleccionada en los campos correspondientes.
+     * 
+     * @param habitacion La habitación seleccionada.
+     */
 
     private void actualizarInfoHabitacion(Habitacion habitacion) {
         txtCamas.setText(habitacion.getCamas());
         txtPrecio.setText(String.valueOf(habitacion.getPrecio()));
         txtDisponibilidad.setText(habitacion.isDisponibilidad() ? "Disponible" : "No disponible");
     }
+/**
+     * Muestra un mensaje en la consola.
+     * 
+     * @param mensaje El mensaje a mostrar.
+     */
 
     private void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
     }
+    /**
+     * Calcula el pago total de la reserva en base a las fechas de llegada y salida,
+     * el precio de la habitación y otros parámetros ingresados por el usuario.
+     */
 
     @FXML
     private void calcularPago() {
@@ -179,6 +254,12 @@ public class AdminReservarController implements SceneAware {
         txtNoches.setText(String.valueOf(noches));
         txtTotal.setText(String.format("%.2f", total));
     }
+    /**
+     * Método que maneja el evento de clic en el botón de "Proceder".
+     * Realiza la creación de la reserva, el pago y la actualización de la base de datos.
+     * 
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnProcederClicked(ActionEvent event) {

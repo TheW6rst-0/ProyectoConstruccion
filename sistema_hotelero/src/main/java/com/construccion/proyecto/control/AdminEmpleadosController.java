@@ -19,6 +19,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+/**
+ * Controlador para la gestión de empleados en la interfaz de administrador.
+ * Implementa la interfaz {@link SceneAware} y {@link Initializable}.
+ */
 
 public class AdminEmpleadosController implements SceneAware, Initializable{
     
@@ -89,46 +93,77 @@ public class AdminEmpleadosController implements SceneAware, Initializable{
     
 
     private SceneManager sceneManager;
+    /**
+     * Establece el gestor de escenas para este controlador.
+     * 
+     * @param sceneManager el gestor de escenas a asociar.
+     */
 
     @Override
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
+    /**
+     * Maneja el evento para cerrar la sesión y redirigir a la pantalla de inicio de sesión.
+     */
 
     @FXML
     void btnCerrarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/Login.fxml");
     }
+    /**
+     * Maneja el evento para navegar a la vista de verificación de administrador.
+     */
 
     @FXML
     void btnCheckClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminCheck.fxml");
     }
+    /**
+     * Maneja el evento para navegar a la vista del panel de habitaciones.
+     */
 
     @FXML
     void btnHabitacionesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
     }
+    /**
+     * Maneja el evento para navegar a la vista de huéspedes.
+     */
 
     @FXML
     void btnHuespedesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminHuespedes.fxml");
     }
+    /**
+     * Maneja el evento para navegar a la vista de reservas.
+     */
 
     @FXML
     void btnReservarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminReservar.fxml");
     }
+    /**
+     * Maneja el evento para navegar a la vista de ventas.
+     */
 
     @FXML
     void btnVentasClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminVentas.fxml");
     }
+        /**
+     * Inicializa el controlador cargando los datos en la tabla de empleados.
+     */
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
        cargarDatosEnTabla(obtenerEmpleados());
     }
     DaoEmpleado daoEmpleado = new DaoEmpleado();
+        /**
+     * Maneja el evento para agregar un nuevo empleado.
+     */
+
     @FXML
     void btnAgregarClicked(ActionEvent event) {
         String contrasena = txtContrasena.getText();
@@ -147,6 +182,9 @@ public class AdminEmpleadosController implements SceneAware, Initializable{
             e.printStackTrace();
         }
     }
+    /**
+     * Maneja el evento para buscar un empleado por su ID.
+     */
 
     @FXML
     void btnIdClicked(ActionEvent event) {
@@ -165,6 +203,9 @@ public class AdminEmpleadosController implements SceneAware, Initializable{
             e.printStackTrace();
         }
     }
+    /**
+     * Maneja el evento para modificar los datos de un empleado.
+     */
 
     @FXML
     void btnModificarClicked(ActionEvent event) {
@@ -185,6 +226,9 @@ public class AdminEmpleadosController implements SceneAware, Initializable{
             e.printStackTrace();
         }
     }
+    /**
+     * Maneja el evento para eliminar un empleado.
+     */
 
     @FXML
     void btnBorrarClicked(ActionEvent event){
@@ -206,6 +250,11 @@ public class AdminEmpleadosController implements SceneAware, Initializable{
     }
 
 
+    /**
+     * Obtiene la lista de empleados desde la base de datos.
+     * 
+     * @return lista de empleados.
+     */
 
     private List<Empleado> obtenerEmpleados() {
         List<Empleado> empleados = null;
@@ -216,6 +265,11 @@ public class AdminEmpleadosController implements SceneAware, Initializable{
         }
         return empleados;
     }
+    /**
+     * Carga los datos de los empleados en la tabla de la interfaz.
+     * 
+     * @param empleados lista de empleados a mostrar.
+     */
 
     private void cargarDatosEnTabla(List<Empleado> empleados) {
         ObservableList<Empleado> observableEmpleados = FXCollections.observableArrayList(empleados);

@@ -24,6 +24,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+    /**
+ * Controlador para la gestión de ventas en la aplicación de administración de reservas.
+ * Permite visualizar, filtrar y generar reportes de ventas basados en las reservas realizadas.
+ */
 
 public class AdminVentasController implements SceneAware{
     DaoReservas daoReservas = new DaoReservas();
@@ -96,41 +100,87 @@ public class AdminVentasController implements SceneAware{
 
 
     private SceneManager sceneManager;
+    /**
+     * Establece el manejador de escena para la navegación entre vistas.
+     *
+     * @param sceneManager El objeto encargado de gestionar las escenas.
+     */
 
     @Override
     public void setSceneManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
+    /**
+     * Maneja el evento de clic en el botón de "Cerrar sesión".
+     * Redirige al usuario a la pantalla de inicio de sesión.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnCerrarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/Login.fxml");
     }
+        /**
+     * Maneja el evento de clic en el botón de "Check-in".
+     * Redirige al usuario a la vista de administración de check-ins.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnCheckClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminCheck.fxml");
     }
+    /**
+     * Maneja el evento de clic en el botón de "Empleados".
+     * Redirige al usuario a la vista de administración de empleados.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnEmpleadosClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminEmpleados.fxml");
     }
+        /**
+     * Maneja el evento de clic en el botón de "Habitaciones".
+     * Redirige al usuario a la vista de administración de habitaciones.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnHabitacionesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminDashboard.fxml");
     }
+        /**
+     * Maneja el evento de clic en el botón de "Huéspedes".
+     * Redirige al usuario a la vista de administración de huéspedes.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnHuespedesClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminHuespedes.fxml");
     }
+    /**
+     * Maneja el evento de clic en el botón de "Reservar".
+     * Redirige al usuario a la vista de reservas.
+     *
+     * @param event El evento de clic.
+     */
 
     @FXML
     void btnReservarClicked(ActionEvent event) {
         sceneManager.switchScene("/view/admin/AdminReservar.fxml");
     }
+        /**
+     * Inicializa la vista de ventas, configurando los elementos de la interfaz.
+     * Incluye la lista de tipos de habitación en el ChoiceBox.
+     */
+
     @FXML
         public void initialize() {
         
@@ -139,7 +189,14 @@ public class AdminVentasController implements SceneAware{
     }
 
     
-    
+        /**
+     * Maneja el evento de clic en el botón de "Generar reporte".
+     * Filtra y obtiene las reservas activas según las fechas y el tipo de habitación seleccionados,
+     * luego muestra la información en una tabla.
+     *
+     * @param event El evento de clic.
+     */
+
     @FXML
 void btnGenerarReporteClicked(ActionEvent event) {
     List<InfoVenta> infoVentas = new ArrayList<>();
@@ -187,7 +244,13 @@ void btnGenerarReporteClicked(ActionEvent event) {
 
     
 
-    
+     /**
+     * Carga la lista de ventas en la tabla de la interfaz gráfica.
+     * Muestra los detalles de cada venta: fechas, huesped, noches, etc.
+     *
+     * @param infoVentas Lista de ventas a mostrar.
+     */
+   
 @FXML
 private TableColumn<InfoVenta, Integer> colNumeroHabitacion;
 
@@ -212,6 +275,9 @@ private void cargarDatosEnTabla(List<InfoVenta> infoVentas) {
 
 
 
+/**
+     * Clase que contiene la información de una venta para su visualización en la tabla.
+     */
 
     public class InfoVenta {
         private int idReservacion;

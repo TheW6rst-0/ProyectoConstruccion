@@ -8,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.construccion.proyecto.model.Tarjeta;
+/**
+ * Clase DAO encargada de realizar las operaciones sobre la base de datos relacionadas con las tarjetas.
+ * Proporciona métodos para agregar, eliminar, modificar y buscar tarjetas.
+ */
 
 public class DaoTarjeta {
     private Connection con = null;
@@ -16,6 +20,11 @@ public class DaoTarjeta {
     private final String pass = "";
 
 
+/**
+     * Establece una conexión con la base de datos.
+     *
+     * @return La conexión a la base de datos.
+     */
 
     public Connection getCon() {
         try {
@@ -27,6 +36,12 @@ public class DaoTarjeta {
         }
         return con;
     }
+    /**
+     * Agrega una nueva tarjeta a la base de datos.
+     *
+     * @param tarjeta La tarjeta que se va a agregar.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public void agregarTarjeta(Tarjeta tarjeta) throws SQLException {
         con = getCon();
@@ -49,6 +64,12 @@ public class DaoTarjeta {
         }
     }
 
+    /**
+     * Elimina una tarjeta de la base de datos.
+     *
+     * @param tarjeta La tarjeta que se va a eliminar.
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public void eliminarTarjeta(Tarjeta tarjeta) throws SQLException {
         con = getCon();
@@ -62,11 +83,23 @@ public class DaoTarjeta {
             System.err.println("Error al Tarjeta el Huesped de la base de datos: " + e.getMessage());
         }
     }
+/**
+     * Modifica una tarjeta existente en la base de datos.
+     * (Este método no está implementado en la clase actual).
+     *
+     * @throws SQLException Si ocurre un error al interactuar con la base de datos.
+     */
 
     public void modificarTarjeta() throws SQLException {
         con = getCon();
 
     }
+/**
+     * Busca una tarjeta en la base de datos por su ID.
+     *
+     * @param idTarjeta El ID de la tarjeta que se desea buscar.
+     * @return La tarjeta con el ID especificado o null si no se encuentra.
+     */
 
     public Tarjeta buscarTarjeta(int idTarjeta) {
         con = getCon();
