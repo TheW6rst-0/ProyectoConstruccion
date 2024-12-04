@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -64,11 +65,6 @@
             </Pane>
          </children>
       </Pane>
-      <ScrollPane layoutX="163.0" layoutY="82.0" prefHeight="529.0" prefWidth="773.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
       <Pane layoutX="-7.0" layoutY="-9.0" prefHeight="90.0" prefWidth="947.0" style="-fx-background-color: #191919;">
          <children>
             <ImageView fitHeight="53.0" fitWidth="183.0" layoutX="27.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
@@ -76,11 +72,138 @@
                   <Image url="@../../images/logo.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="681.0" layoutY="32.0" prefHeight="26.0" prefWidth="252.0" text="Username Here" textAlignment="RIGHT" textFill="#d89b3f">
+         </children>
+      </Pane>
+      <Pane layoutX="168.0" layoutY="89.0" prefHeight="164.0" prefWidth="766.0" style="-fx-background-color: #e9e9e9;">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Single">
                <font>
-                  <Font name="Britannic Bold" size="24.0" />
+                  <Font size="30.0" />
                </font>
             </Label>
+            <Label layoutX="152.0" layoutY="59.0" text="- 1 cama Queen">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="366.0" layoutY="59.0" text="- Escritorio">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="152.0" layoutY="113.0" text="- Mini-refri">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="155.0" layoutY="86.0" text="- Armario con espejo">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="366.0" layoutY="86.0" text="- Tina y Regadera">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="366.0" layoutY="113.0" text="- Amenidades Basicas">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="choiceSNG" layoutX="660.0" layoutY="34.0" prefHeight="25.0" prefWidth="66.0" />
+            <TextField fx:id="txtDispSNG" editable="false" layoutX="660.0" layoutY="74.0" prefHeight="25.0" prefWidth="66.0" />
+            <Label layoutX="612.0" layoutY="38.0" text="# Hab." />
+            <Button fx:id="btnToggleSNG" layoutX="613.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnToggleSNGClicked" prefHeight="25.0" prefWidth="113.0" text="Toggle" />
+            <Label layoutX="620.0" layoutY="78.0" text="Disp." />
+         </children>
+      </Pane>
+      <Pane layoutX="168.0" layoutY="260.0" prefHeight="164.0" prefWidth="766.0" style="-fx-background-color: #e9e9e9;">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Double">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="152.0" layoutY="59.0" text="- 2 camas Queen">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="366.0" layoutY="59.0" text="- Sofa-cama">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="152.0" layoutY="113.0" text="- Mini-refri">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="155.0" layoutY="86.0" text="- Armario con espejo">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="366.0" layoutY="86.0" text="- Tina y Regadera">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="366.0" layoutY="113.0" text="- Amenidades Basicas">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="choiceDBL" layoutX="664.0" layoutY="37.0" prefHeight="25.0" prefWidth="66.0" />
+            <TextField fx:id="txtDispDBL" editable="false" layoutX="664.0" layoutY="74.0" prefHeight="25.0" prefWidth="66.0" />
+            <Label layoutX="617.0" layoutY="41.0" text="# Hab." />
+            <Button fx:id="btnToggleDBL" layoutX="617.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnToggleDBLClicked" prefHeight="25.0" prefWidth="113.0" text="Toggle" />
+            <Label layoutX="621.0" layoutY="78.0" text="Disp." />
+         </children>
+      </Pane>
+      <Pane layoutX="168.0" layoutY="434.0" prefHeight="170.0" prefWidth="766.0" style="-fx-background-color: #e9e9e9;">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Suite">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="152.0" layoutY="59.0" text="- 2 camas King">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="366.0" layoutY="59.0" text="- Sala de estar">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="152.0" layoutY="113.0" text="- Refri y Nevera">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="155.0" layoutY="86.0" text="- Vestidor">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="366.0" layoutY="86.0" text="- Baño con jacuzzi">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="366.0" layoutY="113.0" text="- Acceso libre a snacks">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="choiceST" layoutX="663.0" layoutY="39.0" prefHeight="25.0" prefWidth="66.0" />
+            <TextField fx:id="txtDispST" editable="false" layoutX="663.0" layoutY="77.0" prefHeight="25.0" prefWidth="66.0" />
+            <Label layoutX="617.0" layoutY="43.0" text="# Hab." />
+            <Button fx:id="btnToggleST" layoutX="617.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnToggleSTClicked" prefHeight="25.0" prefWidth="113.0" text="Toggle" />
+            <Label layoutX="621.0" layoutY="81.0" text="Disp." />
          </children>
       </Pane>
    </children>

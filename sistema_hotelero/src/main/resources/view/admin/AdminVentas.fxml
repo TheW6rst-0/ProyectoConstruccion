@@ -96,13 +96,12 @@
                   <TableView layoutX="-2.0" layoutY="109.0" prefHeight="420.0" prefWidth="773.0">
                     <columns>
                       <TableColumn fx:id="colReservacion" prefWidth="75.0" text="Reservacion" />
-                      <TableColumn fx:id="colHuesped" prefWidth="242.0" text="Nombre Huesped" />
-                        <TableColumn fx:id="colNum" prefWidth="47.0" text="# Hab." />
+                      <TableColumn fx:id="colHuesped" prefWidth="321.0" text="Nombre Huesped" />
+                        <TableColumn fx:id="colNum" prefWidth="53.0" text="# Hab." />
                         <TableColumn fx:id="colTipo" prefWidth="45.0" text="Tipo" />
-                        <TableColumn fx:id="colFechaLlegada" prefWidth="116.0" text="Fecha Llegada" />
+                        <TableColumn fx:id="colFechaLlegada" prefWidth="99.0" text="Fecha Llegada" />
                         <TableColumn fx:id="colFechaSalida" prefWidth="98.0" text="Fecha Salida" />
-                        <TableColumn fx:id="colNoches" prefWidth="53.0" text="Noches" />
-                        <TableColumn fx:id="colTotal" prefWidth="95.0" text="Tarifa Total" />
+                        <TableColumn fx:id="colTotal" prefWidth="81.0" text="Tarifa Total" />
                     </columns>
                   </TableView>
                   <Pane layoutX="5.0" layoutY="3.0" prefHeight="98.0" prefWidth="760.0" style="-fx-background-color: #e9e9e9;">
