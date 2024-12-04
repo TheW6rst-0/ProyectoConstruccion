@@ -91,6 +91,8 @@ public class AdminReservarController implements SceneAware{
     @FXML
     private TextField txtNombre;
 
+    @FXML
+    private TextField txtMonto;
 
     @FXML
     private TextField txtPrecio;
