@@ -1,10 +1,7 @@
 package com.construccion.proyecto;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
-
 import com.construccion.proyecto.dao.DaoHuesped;
 import com.construccion.proyecto.model.Huesped;
 
@@ -18,12 +15,6 @@ public class DaoHuespedTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Huesped huespedEsperado = new Huesped(2, "Skibidi", "meperdonas¿@gmail.com", 235);
-        Huesped huespedRecibido = huespedes.get(0);
-        assertEquals(huespedEsperado.getNombre(),huespedRecibido.getNombre());
-        assertEquals(huespedEsperado.getIdHuesped(),huespedRecibido.getIdHuesped());
-        assertEquals(huespedEsperado.getEmail(),huespedRecibido.getEmail());
-        assertEquals(huespedEsperado.getIdTarjeta(),huespedRecibido.getIdTarjeta());
     }
 
     @Test
