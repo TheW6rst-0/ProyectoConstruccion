@@ -45,8 +45,7 @@ public class DaoTarjeta {
             statement.executeUpdate();
             System.out.println("Tarjeta guardado exitosamente en la base de datos.");
         } catch (SQLException e) {
-          
-            System.err.println("Error al guardar el Tarjeta en la base de datos: " + e.getMessage());
+            System.err.println("Error al guardar el Tarjeta en la base de datos");
         }
     }
 

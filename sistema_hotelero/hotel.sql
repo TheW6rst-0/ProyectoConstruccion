@@ -42,8 +42,11 @@ CREATE TABLE `empleado` (
 INSERT INTO `empleado` (`claveEmp`, `nombreEmp`, `usuario`, `contrasenia`, `rol`) VALUES
 (1, 'Emiliano Yamamoto', 'Bruhpepo', 'Chivas23', 0),
 (2, 'Alexkibidi Canto', 'CP7', 'so', 0),
-(23, 'asdfssdf', 'efsafdfs', 'mjaja', 0),
-(24, 'IanGOD Admin', 'gh0st', 'admin', 1);
+(3, 'asdfssdf', 'efsafdfs', 'mjaja', 0),
+(4, 'IanGOD', 'gh0st', 'admin', 1);
+(4, 'Admin', 'admin', '1', 1);
+(4, 'emp', 'emp', '1', 0);
+
 
 -- --------------------------------------------------------
 
@@ -64,7 +67,9 @@ CREATE TABLE `habitacion` (
 --
 
 INSERT INTO `habitacion` (`idHabitacion`, `tipoHabitacion`, `camas`, `precio`, `disponibilidad`) VALUES
-(64, 'SNG', 1, 2000, 1);
+(64, 'SNG', 1, 2000, 1),
+(65, 'DBL', 2, 3000, 1),
+(66, 'ST', 4, 4000, 1);
 
 -- --------------------------------------------------------
 
@@ -76,7 +81,7 @@ CREATE TABLE `huesped` (
   `idHuesped` int(10) NOT NULL,
   `nombreHuesped` varchar(50) NOT NULL,
   `emailHuesped` varchar(50) NOT NULL,
-  `idTarjeta` int(10) NOT NULL
+  `idTarjeta` int(10)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -84,7 +89,9 @@ CREATE TABLE `huesped` (
 --
 
 INSERT INTO `huesped` (`idHuesped`, `nombreHuesped`, `emailHuesped`, `idTarjeta`) VALUES
-(2, 'Skibidi', 'eresputo@gmail.com', 235);
+(2, 'Skibidi', 'siseñool@gmail.com', 235),
+(1, 'Buntarou Yamamoto', 'onichan@gmail.com', 235),
+(3, 'Goku', 'kamehameha@gmail.com', 235);
 
 -- --------------------------------------------------------
 
@@ -105,7 +112,9 @@ CREATE TABLE `reservaciones` (
 --
 
 INSERT INTO `reservaciones` (`idReservacion`, `idHuesped`, `idHabitacion`, `fechaLlegada`, `fechaSalida`) VALUES
-(21, 2, 64, '2024-12-01', '2024-12-02');
+(21, 2, 64, '2024-12-01', '2024-12-02'),
+(22, 1, 65, '2024-12-01', '2024-12-02'),
+(23, 2, 66, '2024-12-01', '2024-12-02');
 
 -- --------------------------------------------------------
 
@@ -214,8 +223,8 @@ ALTER TABLE `huesped`
 -- Constraints for table `reservaciones`
 --
 ALTER TABLE `reservaciones`
-  ADD CONSTRAINT `Reserva_habitacion` FOREIGN KEY (`idHabitacion`) REFERENCES `habitacion` (`idHabitacion`),
-  ADD CONSTRAINT `Reserva_huesped` FOREIGN KEY (`idHuesped`) REFERENCES `huesped` (`idHuesped`);
+  ADD CONSTRAINT `Reserva_habitacion` FOREIGN KEY (`idHabitacion`) REFERENCES `habitacion` (`idHabitacion`)  ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Reserva_huesped` FOREIGN KEY (`idHuesped`) REFERENCES `huesped` (`idHuesped`)  ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

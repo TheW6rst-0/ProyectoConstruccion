@@ -6,11 +6,11 @@ public class Huesped {
     private String email;
     private int idTarjeta;
 
-    public Huesped( int id,String nombre, String email, int idtarjeta) {
+    public Huesped( int id,String nombre, String email, int idTarjeta) {
         this.idHuesped = id;
         this.nombre = nombre;
         this.email = email;
-        this.idTarjeta = idtarjeta;
+        this.idTarjeta = idTarjeta;
     }
 
     public String getNombre() {
@@ -41,7 +41,7 @@ public class Huesped {
         return idTarjeta;
     }
 
-    public void setIdTarjeta(int idtarjeta) {
-        this.idTarjeta = idtarjeta;
+    public void setIdTarjeta(int idTarjeta) {
+        this.idTarjeta = idTarjeta;
     }
 }

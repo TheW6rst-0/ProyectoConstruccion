@@ -30,57 +30,62 @@ public class DaoEmpleado {
         return con;
     }
 
-    public void agregarEmpleado(Empleado emp) throws SQLException {
+    public boolean agregarEmpleado(Empleado emp) throws SQLException {
         con = getCon();
-        String sql = "INSERT INTO empleado (claveEmp, nombreEmp, usuario, contrasenia) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO empleado (claveEmp, nombreEmp, usuario, contrasenia, rol) VALUES(?,?,?,?,?)";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, emp.getClaveEmp());
             statement.setString(2, emp.getNombre());
             statement.setString(3, emp.getUsuario());
             statement.setString(4, emp.getContrasenia());
+            statement.setInt(5, emp.getRol());
             statement.executeUpdate();
-            System.out.println("Empleado guardado exitosamente en la base de datos.");
+            return true;
         } catch (SQLException e) {
           
             System.err.println("Error al guardar el Empleado en la base de datos: " + e.getMessage());
+            return false;
         }
     }
 
-    public void eliminarEmpleado(Empleado emp) throws SQLException {
+    public boolean eliminarEmpleado(Empleado emp) throws SQLException {
         con = getCon();
         String sql = "DELETE FROM empleado WHERE claveEmp=?";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, emp.getClaveEmp());
             statement.executeUpdate();
-            System.out.println("Empleado eliminado exitosamente de la base de datos.");
+            return true;
         } catch (SQLException e) {
-            
-            System.err.println("Error al eliminar el Empleado de la base de datos: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 
-    public void modificarEmpleado(Empleado emp) throws SQLException {
+    public boolean modificarEmpleado(Empleado emp) throws SQLException {
         con = getCon();
-        String sql = "UPDATE empleado SET nombreEmp = ?, usuario = ?, contrasenia = ? WHERE claveEmp = ?";
+        String sql = "UPDATE empleado SET nombreEmp = ?, usuario = ?, contrasenia = ?, rol = ? WHERE claveEmp = ?";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setString(1, emp.getNombre());
             statement.setString(2, emp.getUsuario());
             statement.setString(3, emp.getContrasenia());
-            statement.setInt(4, emp.getClaveEmp());
+            statement.setInt(4, emp.getRol());
+            statement.setInt(5, emp.getClaveEmp());
     
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Empleado actualizado exitosamente.");
+                return true;
             } else {
                 System.out.println("No se encontró ningún empleado con la clave especificada.");
+                return false;
             }
         } catch (SQLException e) {
-           
-            System.err.println("Error al modificar el empleado: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 
-    public void buscarEmpleado(int clave) throws SQLException {
+    public Empleado buscarEmpleado(int clave) throws SQLException {
         con = getCon();
         String sqlConsulta = "SELECT * FROM empleado WHERE claveEmp = ?";
         try (PreparedStatement statement = con.prepareStatement(sqlConsulta)) {
@@ -93,20 +98,18 @@ public class DaoEmpleado {
                 String nombre = resultSet.getString("nombreEmp");
                 String usuario = resultSet.getString("usuario");
                 String contrasenia = resultSet.getString("contrasenia");
-
-                System.out.println("Información del empleado:");
-                System.out.println("Clave: " + claveEmp);
-                System.out.println("Nombre: " + nombre);
-                System.out.println("Usuario: " + usuario);
-                System.out.println("Contraseña: " + contrasenia);
+                int rol = resultSet.getInt("rol");
+                return new Empleado(claveEmp, nombre, usuario, contrasenia, rol);
             } else {
-                System.out.println("No se encontró ningún empleado con la clave: " + clave);
+                return null;
             }
         } catch (SQLException e) {
             
             System.err.println("Error al buscar el empleado: " + e.getMessage());
+            return null;
         }
     }
+
     public List<Empleado> obtenerEmpleados() throws SQLException {
         con = getCon();
         List<Empleado> empleados = new ArrayList<>();

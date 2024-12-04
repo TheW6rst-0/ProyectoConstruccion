@@ -27,7 +27,7 @@ public class DaoHuesped {
         return con;
     }
 
-    public void agregarHuesped(Huesped huesped) throws SQLException {
+    public boolean agregarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
         String sql = "INSERT INTO huesped (idHuesped,nombreHuesped,emailHuesped,idTarjeta) VALUES(?,?,?,?)";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
@@ -36,30 +36,29 @@ public class DaoHuesped {
             statement.setString(3, huesped.getEmail());
             statement.setInt(4, huesped.getIdTarjeta());
             statement.executeUpdate();
-            System.out.println("Huesped guardado exitosamente en la base de datos.");
+            return true;
         } catch (SQLException e) {
-           
-            System.err.println("Error al guardar el Huesped en la base de datos: " + e.getMessage());
+            return false;
         }
     }
 
     
     
 
-    public void eliminarHuesped(Huesped huesped) throws SQLException {
+    public boolean eliminarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
         String sql = "DELETE FROM huesped WHERE idHuesped=?";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, huesped.getIdHuesped());
             statement.executeUpdate();
-            System.out.println("Huesped eliminado exitosamente de la base de datos.");
+            return true;
         } catch (SQLException e) {
-            
-            System.err.println("Error al eliminar el Huesped de la base de datos: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
-
-    public void modificarHuesped(Huesped huesped) throws SQLException {
+    
+    public boolean modificarHuesped(Huesped huesped) throws SQLException {
         con = getCon();
         String sql = "UPDATE huesped SET nombreHuesped = ?, emailHuesped = ?, idTarjeta = ? WHERE idHuesped = ?";
         try (PreparedStatement statement = con.prepareStatement(sql)) {
@@ -71,12 +70,14 @@ public class DaoHuesped {
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Huésped actualizado exitosamente.");
+                return true;
             } else {
                 System.out.println("No se encontró ningún huésped con el ID especificado.");
+                return false;
             }
         } catch (SQLException e) {
-          
-            System.err.println("Error al modificar el huésped: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
     
