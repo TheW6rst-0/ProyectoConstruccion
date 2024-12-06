@@ -35,6 +35,13 @@ public class Empleado {
         this.rol = rol;
     }
 
+    public Empleado(String nombre, String usuario, String contrasenia, int rol){
+        this.nombre = nombre;
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
+        this.rol = rol;
+    }
+
     public String getContrasenia() {
         return contrasenia;
     }

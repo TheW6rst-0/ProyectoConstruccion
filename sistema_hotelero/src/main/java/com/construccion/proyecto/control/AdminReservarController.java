@@ -17,6 +17,7 @@ import com.construccion.proyecto.model.Tarjeta;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -227,10 +228,10 @@ public class AdminReservarController implements SceneAware {
         LocalDate date1 = fechaLlegada.getValue();
         LocalDate date2 = fechaSalida.getValue();
 
-        if (date1 == null || date2 == null || date1.isAfter(date2)) {
+        if (date1 == null || date2 == null || date1.isAfter(date2) ) {
             txtNoches.clear();
             txtTotal.clear();
-            System.out.println("Fechas inválidas. Por favor, verifica.");
+          
             return;
         }
 
@@ -287,9 +288,12 @@ public class AdminReservarController implements SceneAware {
                 }
             }
 
-            daoReservas.agregarReservacion(reserva);
+            Boolean estado = daoReservas.agregarReservacion(reserva);
+            if(estado){
+                sceneManager.mostrarAlerta("Acción exitosa", "No se logró agregar una reservación.", AlertType.INFORMATION);
+            }
         } catch (Exception e) {
-            System.out.println("Error al procesar la reserva: " + e.getMessage());
+            sceneManager.mostrarAlerta("Error", "No se logró agregar una reservación", AlertType.ERROR);
         }
     }
 }

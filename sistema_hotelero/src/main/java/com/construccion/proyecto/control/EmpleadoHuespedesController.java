@@ -22,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -235,7 +236,7 @@ public class EmpleadoHuespedesController implements SceneAware, Initializable {
             reservaciones = daoReservas.obtenerReservaciones();
         } catch (Exception e) {
             e.printStackTrace();
-            sceneManager.mostrarAlerta("Error", "No se pudieron cargar los huespedes.", null);
+            sceneManager.mostrarAlerta("Error", "No se pudieron cargar los huespedes.", AlertType.ERROR);
         }
         return reservaciones;
     }

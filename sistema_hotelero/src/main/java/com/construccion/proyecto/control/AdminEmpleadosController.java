@@ -166,20 +166,26 @@ public class AdminEmpleadosController implements SceneAware, Initializable{
 
     @FXML
     void btnAgregarClicked(ActionEvent event) {
+        int rol;
         String contrasena = txtContrasena.getText();
         String nombre = txtNombre.getText();
         String usuario = txtUsuario.getText();
-        int rol = Integer.parseInt(txtRol.getText());
-        int id = Integer.parseInt(txtId.getText());
-        Empleado empleado = new Empleado(id, nombre, usuario, contrasena, rol);
+        String rolString = txtRol.getText();
+        if( rolString.isEmpty() || nombre.isEmpty() || usuario.isEmpty() || contrasena.isEmpty()){
+            sceneManager.mostrarAlerta("Error", "No se pudo agregar el empleado", AlertType.ERROR);
+            return;
+        }
+
         try {
+            rol = Integer.parseInt(rolString);
+            Empleado empleado = new Empleado(nombre, usuario, contrasena, rol);
             if(daoEmpleado.agregarEmpleado(empleado)){
                 sceneManager.mostrarAlerta("Accion completada", "Empleado agregado exitosamente", AlertType.INFORMATION);
             }else{
                 sceneManager.mostrarAlerta("Error", "No se pudo agregar el empleado", AlertType.ERROR);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            sceneManager.mostrarAlerta("Error", "No se pudo agregar el empleado", AlertType.ERROR);
         }
     }
     /**
